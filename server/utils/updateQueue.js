@@ -1,0 +1,1 @@
+const { Medic } = require("../models");

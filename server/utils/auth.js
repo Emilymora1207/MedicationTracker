@@ -8,7 +8,7 @@ require("dotenv").config();
 const secret = process.env.JWT_SECRET;
 const expiration = process.env.JWT_EXP;
 
-// Sitting the functions for authMiddleware for token verification and user assignment to req, and signToken for generating JWTs based on user data.
+//functions for authMiddleware for token verification and user assignment to req, and signToken for generating JWTs based on user data.
 module.exports = {
   authMiddleware: ({ req }) => {
     let token = req.body.token || req.query.token || req.headers.authorization;
