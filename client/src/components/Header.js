@@ -60,13 +60,13 @@ function Header() {
                     <li>View all Medication</li>
                 </a>
                 <a style={styles.eachLink}
-                    className='link logout-link' onClick={()=> {setLoggedIn(false)}}>
-                    <li>logout</li>
+                    className='link account-link' onClick={()=> {setLoggedIn(false)}}>
+                    <li>Account</li>
                 </a>
                 </ul>
             ): (
             <ul style={styles.links}>
-              <li style={styles.eachLink}><a className="btn btn-lg btn-primary m-2" onClick={() => {setLoggedIn(true)}}>
+              <li style={styles.activeLink}><a className="btn btn-lg btn-primary m-2" onClick={() => {setLoggedIn(true)}}>
                 Login
               </a>
               </li>

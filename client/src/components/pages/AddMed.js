@@ -1,4 +1,4 @@
-import logo from '../assets/Asset1.svg';
+import logo from '../../assets/Asset1.svg';
 
 const styles = {
     container: {
@@ -7,19 +7,19 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
     },
-    background: {
-        backgroundImage: 'linear-gradient(to bottom, rgba(77, 205, 255, 0.4), rgba(69, 245, 0, 0.4))',
-        borderRadius: '5px',
-        padding: '10px',
+    addMed: {
         display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
+        width: '30%',
     },
     form: {
+        background: 'none',
         display: 'flex',
         flexDirection: 'column',
-
-        margin: '20px'
+        padding: '20px',
+        justifyContent: 'space-around',
+        borderRadius: '0%',
+        alignItems: 'center',
+        width: '97.6%'
     },
     question: {
         display: 'flex',
@@ -28,21 +28,23 @@ const styles = {
         // alignItems: 'space-between'
     },
     inputs: {
-        border: 'none',
-        backgroundColor: 'rgba(136, 163, 173, 0.4)',
+        borderTop: 'none',
+        borderLeft: 'none',
+        borderRight: 'none',
+        borderBottom: '1px black solid',
         height: '20px',
-        borderRadius: '5px',
-        width: '200px',
-        margin: '5px',
-        border: 'none',
+        width: '80%',
         outline: 'none',
+        background: 'none',
+        margin: '15px 0'
     },
     selects: {
         display: 'flex',
-        flexDirection: 'column',
     },
     labels: {
-        width: '300px',
+        width: '80%',
+        textAlign: 'left',
+        margin: '15px 0'
     },
     button: {
         cursor: 'pointer',
@@ -52,27 +54,32 @@ const styles = {
         height: '38px',
         padding: '8px 24px',
         borderRadius: '50px',
+        border: 'none',
         backgroundImage: 'linear-gradient(45deg, rgb(36, 135, 255),rgb(107, 236, 56))',
-        // boxShadow: '0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%)',
-        // transition: 'all .2s ease-out',
-        // ':hover': {
-        //     boxShadow: '0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%)',
-        // }
+        boxShadow: '0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%)',
+        transition: 'all .2s ease-out',
+        ':hover': {
+            boxShadow: '0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%)',
+        }
+    },
+    borderSides: {
+        width: '1.2%',
+        // height: '400px',
+        backgroundImage: 'linear-gradient(rgba(36, 135, 255, 0) 2%, rgb(36, 135, 255) 20%, rgb(41, 227, 0) 80%, rgba(41, 227, 0, 0) 98%)',
     }
 }
 
 function AddMed() {
     return (
         <div style={styles.container}>
-            <div style={styles.background}>
             <h1>Add a New Medication</h1>
-            <img style={{height: '100px'}} alt="logo" src={logo} />
-            <form style={styles.form}>
-                <section style={styles.question} className='question'>
+            <img style={{ height: '100px' }} alt="logo" src={logo} />
+            {/* adds the gradient border */}
+            <div style={styles.addMed}>
+                <div style={styles.borderSides}></div>
+                <form style={styles.form}>
                     <label style={styles.labels} for='medName'>Medication Name: </label>
-                    <input style={styles.inputs} type='text' name='medName' placeholder='i.e. Ibuprophen' />
-                </section>
-                <section style={styles.question} className='question'>
+                    <input style={styles.inputs} type='text' name='medName' />
                     <label style={styles.labels} for='range'>How often do you take your Medication? </label>
                     <div style={styles.selects}>
                         <select style={styles.inputs} name='subRange'>
@@ -85,16 +92,14 @@ function AddMed() {
                             <option value='monthly'>Month</option>
                         </select>
                     </div>
-                </section>
-                <section style={styles.question} className='question'>
                     <label style={styles.labels} for='amount'>How many times do you need to take this Medication? <br /><sub>if no set amount write 'N/A'</sub></label>
                     <input style={styles.inputs} type='text' placeholder='i.e. "30"' name='amount' />
-                </section>
-                <section style={styles.question} className='question'>
                     <label style={styles.labels} for='dosage'>What dosage do you take?</label>
                     <input style={styles.inputs} type='text' placeholder='i.e. "450mg"' name='dosage' />
-                </section>
-            </form>
+                    <button style={styles.button} className='addMed'>Add Medication</button>
+                </form>
+                {/* adds the gradient border */}
+                <div style={styles.borderSides}></div>
             </div>
         </div>
     )
