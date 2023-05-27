@@ -4,43 +4,16 @@
   --light-blue: rgb(77, 204, 255);
   --dark-green: rgb(18, 62, 8);
   --green: rgb(41, 227, 0);
-  --light-green: rgb(150, 239, 116);
+  --light-green: rgb(205, 249, 187);
+  --test: rgba(0, 0, 0, 0.145);
+}
+
+body {
+  background-image: linear-gradient(45deg, rgb(152, 228, 255) 33%, rgb(214, 244, 255));
+  /* background-color: rgb(214, 244, 255) */
 }
 
 
-.App {
+/* .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.start {
-  color: var(--light-green);
-}
-
-.App-header {
-  background-color: rgba(0, 0, 0, 0);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--dark-blue);
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */
