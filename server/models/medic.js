@@ -69,7 +69,7 @@ const medicSchema = new Schema({
   },
 });
 
-// adds times to queue when medicine is created
+// adds times to queue when medic is created
 medicSchema.pre("save", async (next) => {
   if (this.isNew || this.isModified("times")) {
     this.times.forEach((time) => this.queue.push({ time }));

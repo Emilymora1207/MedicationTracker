@@ -1,5 +1,5 @@
-const medic = require("./medic");
+const Medic = require("./Medic");
 
-const user = require("./user");
+const User = require("./User");
 
-module.exports = { user, medic };
+module.exports = { User, Medic };
