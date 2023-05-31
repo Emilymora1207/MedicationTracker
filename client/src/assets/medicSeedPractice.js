@@ -3,8 +3,8 @@ const medic = [
         name: 'ibuprophen',
         dosage: '450mg',
         amount: 'N/A', 
-        range: 'daily',
-        subRange: 'every'
+        range: 'Week',
+        subRange: 'every other'
     },
     {
         name: 'Amoxicillin',
@@ -14,7 +14,7 @@ const medic = [
         subRange: 'every'
     },
     {
-        name: 'ibuprophen',
+        name: 'tylenol',
         dosage: '450mg',
         amount: '30', 
         range: 'daily',

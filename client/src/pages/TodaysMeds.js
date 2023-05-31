@@ -1,4 +1,4 @@
-import logo from '../../assets/Asset1.svg';
+import logo from '../assets/Asset1.svg';
 
 const styles = {
     centered: {

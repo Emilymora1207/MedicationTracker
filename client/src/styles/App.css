@@ -3,9 +3,9 @@
   --blue: rgb(36, 135, 255);
   --light-blue: rgb(77, 204, 255);
   --dark-green: rgb(18, 62, 8);
-  --green: rgb(41, 227, 0);
+  --green: rgb(106, 233, 77);
   --light-green: rgb(205, 249, 187);
-  --test: rgba(0, 0, 0, 0.145);
+  --test: rgb(115, 115, 115);
 }
 
 body {
