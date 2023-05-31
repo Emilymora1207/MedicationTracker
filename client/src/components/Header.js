@@ -1,6 +1,9 @@
 // import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import {colors} from '../assets/colors';
+// import { colors } from '../assets/colors';
+import Auth from '../utils/auth';
+import { Link } from 'react-router-dom';
+
 import logo from '../assets/Asset1.svg';
 
 
@@ -14,12 +17,14 @@ const styles = {
     },
     homeLink: {
         display: 'flex',
+        textDecoration: 'none',
+        color: 'black'
     },
     logo: {
         height: '80px',
     },
     links: {
-        textDecoration: 'none',
+
         display: 'flex',
         listStyleType: 'none',
         width: '30%',
@@ -27,56 +32,68 @@ const styles = {
         alignItems: 'center',
 
     },
+    eachLink: {
+        textDecoration: 'none',
+        color: 'black'
+    },
     activeLink: {
         borderBottom: '3px rgb(77, 204, 255) solid',
-        padding: '30px 0'
+        padding: '30px 0',
+        textDecoration: 'none',
+        color: 'black'
     }
 }
 
 
 
 function Header() {
-    const [loggedIn, setLoggedIn] = useState(true);
+    // const [loggedIn, setLoggedIn] = useState(true);
+    const logout = (event) => {
+        event.preventDefault();
+        Auth.logout();
+      };
     return (
         <div>
             <header style={styles.header}>
-                <a src='#' style={styles.homeLink}
+                <Link to='/' style={styles.homeLink}
                     className='link home-link'>
                     <img style={styles.logo} alt="logo" src={logo} />
                     <h1>Medication Tracker</h1>
-                </a>
+                </Link>
 
                 {/* *********************need to add the auth login stuff once the back end is set up */}
                 {/* {Auth.loggedIn() ? (
             <> */}
-            {loggedIn ? (
-                                <ul style={styles.links}>
-                <a style={styles.eachLink}
-                    className='link add-link'>
-                    <li>Add Medication</li>
-                </a>
-                <a style={styles.activeLink}
-                    className='link view-all-link'>
-                    <li>View all Medication</li>
-                </a>
-                <a style={styles.eachLink}
-                    className='link account-link' onClick={()=> {setLoggedIn(false)}}>
-                    <li>Account</li>
-                </a>
-                </ul>
-            ): (
-            <ul style={styles.links}>
-              <li style={styles.activeLink}><a className="btn btn-lg btn-primary m-2" onClick={() => {setLoggedIn(true)}}>
-                Login
-              </a>
-              </li>
-              <li style={styles.eachLink}><a className="btn btn-lg btn-light m-2" >
-                Signup
-              </a>
-              </li>
-              </ul>
-              )}
-            {/* </>
+                {Auth.loggedIn() ? (
+                    <ul style={styles.links}>
+                        <Link to='/addNew' style={styles.eachLink}
+                            className='link add-link'>
+                            <li>Add Medication</li>
+                        </Link>
+                        <Link to='/allMeds' style={styles.activeLink}
+                            className='link view-all-link'>
+                            <li>View all Medication</li>
+                        </Link>
+                        <a style={styles.eachLink}
+                            className='link account-link' onClick={logout}>
+                            <li>Logout</li>
+                        </a>
+                    </ul>
+                ) : (
+                    <ul style={styles.links}>
+                        <li style={styles.activeLink}>
+                            <Link to='/login' className="btn btn-lg btn-primary m-2">
+                                Login
+                            </Link>
+                        </li>
+                        <li style={styles.eachLink}>
+                            <Link to='/signup' className="btn btn-lg btn-light m-2" >
+                                Signup
+                            </Link>
+                        </li>
+                    </ul>
+                )}
+                {/* </>
           )} */}
 
             </header>
