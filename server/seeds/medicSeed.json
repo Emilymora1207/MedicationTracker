@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Xanax",
+    "amount": 10,
+    "range": "daily",
+    "times": ["09:30", "02:30"]
+  },
+  {
+    "name": "Klonopin",
+    "amount": 20,
+    "range": "weekly",
+    "times": ["11:30", "04:30"]
+  },
+  {
+    "name": "Valium",
+    "amount": 30,
+    "range": "monthly",
+    "times": ["12:30", "05:30"]
+  },
+  {
+    "name": "Ambien",
+    "amount": 15,
+    "range": "daily",
+    "times": ["13:30", "06:30"]
+  },
+  {
+    "name": "Lunesta",
+    "amount": 40,
+    "range": "weekly",
+    "times": ["14:30", "07:30"]
+  },
+  {
+    "name": "Sonata",
+    "amount": 5,
+    "range": "monthly",
+    "times": ["15:30", "08:30"]
+  },
+  {
+    "name": "Avinza",
+    "amount": 35,
+    "range": "daily",
+    "times": ["16:30", "09:30"]
+  },
+  {
+    "name": "OxyContin",
+    "amount": 45,
+    "range": "weekly",
+    "times": ["17:30", "10:30"]
+  },
+  {
+    "name": "Vicodin",
+    "amount": 100,
+    "range": "monthly",
+    "times": ["18:30", "11:30"]
+  },
+  {
+    "name": "Adderal",
+    "amount": 60,
+    "range": "daily",
+    "times": ["19:30", "12:30"]
+  }
+]
