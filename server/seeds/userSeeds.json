@@ -1,0 +1,42 @@
+[
+  {
+    "username": "Angelina",
+    "password": "password01"
+  },
+  {
+    "username": "Alexander",
+    "password": "password02"
+  },
+  {
+    "username": "Tom",
+    "password": "password03"
+  },
+  {
+    "username": "Kathy",
+    "password": "password04"
+  },
+  {
+    "username": "Bob",
+    "password": "password05"
+  },
+  {
+    "username": "Linda",
+    "password": "password06"
+  },
+  {
+    "username": "Horan",
+    "password": "password07"
+  },
+  {
+    "username": "Timothy",
+    "password": "password08"
+  },
+  {
+    "username": "Kity",
+    "password": "password09"
+  },
+  {
+    "username": "Mike",
+    "password": "password10"
+  }
+]
