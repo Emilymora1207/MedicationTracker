@@ -1,7 +1,7 @@
 {
-  "name": "programming-thoughts",
+  "name": "medication-tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Under Constraction🔥",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
@@ -15,5 +15,13 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emilymora1207/MedicationTracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Emilymora1207/MedicationTracker/issues"
+  },
+  "homepage": "https://github.com/Emilymora1207/MedicationTracker#readme"
 }
