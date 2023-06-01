@@ -36,7 +36,7 @@ const medicSchema = new Schema({
   times: [
     {
       type: String,
-      validate: (time) => {
+      validate: function (time) {
         let found = 0;
 
         for (let i = 0; i < this.times.length; i++)
@@ -70,7 +70,7 @@ const medicSchema = new Schema({
 });
 
 // adds times to queue when medic is created
-medicSchema.pre("save", async (next) => {
+medicSchema.pre("save", async function (next) {
   if (this.isNew || this.isModified("times")) {
     this.times.forEach((time) => this.queue.push({ time }));
   }
