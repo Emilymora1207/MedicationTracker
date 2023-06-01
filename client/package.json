@@ -15,7 +15,17 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
     "reactjs-popup": "^2.0.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@emailjs/browser": "^3.11.0",
+    "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.9.1",
+    "gh-pages": "^4.0.0",
+    "react-simple-typewriter": "^5.0.1",
+    "sweetalert2": "^11.4.38",
+    "google-map-react": "^2.2.1",
+    "@types/enzyme": "^3.10.13",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "enzyme": "^3.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
