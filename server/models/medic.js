@@ -10,8 +10,8 @@ const medicSchema = new Schema({
     trim: true,
   },
   dosage: {
-    type: Number,
-    min: [1],
+    type: String,
+    // min: [1],
     default: 1,
     required: true,
   },
@@ -26,47 +26,60 @@ const medicSchema = new Schema({
     default: "daily",
     required: true,
   },
-  subRange: {
-    type: String,
-    enum: ["every", "every other"],
-    default: "every",
-    required: true,
+  // subRange: {
+  //   type: String,
+  //   enum: ["every", "every other"],
+  //   default: "every",
+  //   required: true,
+  // },
+  everyOtherTime: {
+    type: Boolean
   },
+  dayOfWeek: {
+    type: Number,
+    min: [0, "Amount cannot be negative"],
+  },  
+  dayOfMonth: {
+    type: Number,
+    min: [0, "Amount cannot be negative"],
+  },  
+  
+userId: {
+  type: Schema.Types.ObjectId,
+  required: true,
+  ref: "User",
+},
   // times are stored as strings in 12 hour format
-  times: [
-    {
-      type: String,
-      validate: function (time) {
-        let found = 0;
+  // times: [
+  //   {
+  //     type: String,
+  //     validate: function (time) {
+  //       let found = 0;
 
-        for (let i = 0; i < this.times.length; i++)
-          if (this.times[i] == time) found++;
-        if (found > 1) return false;
-        else return true;
-      },
-    },
-  ],
-  queue: [
-    {
-      time: { type: String, required: true },
-      checked: { type: Boolean, default: false },
-    },
-  ],
-  queueLastFilled: {
-    type: Date,
-    required: true,
-    default: new Date().setHours(0, 0, 0, 0),
-  },
-  isActive: {
-    type: Boolean,
-    required: true,
-    default: true,
-  },
-  userId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: "User",
-  },
+  //       for (let i = 0; i < this.times.length; i++)
+  //         if (this.times[i] == time) found++;
+  //       if (found > 1) return false;
+  //       else return true;
+  //     },
+  //   },
+  // ],
+  // queue: [
+  //   {
+  //     time: { type: String, required: true },
+  //     checked: { type: Boolean, default: false },
+  //   },
+  // ],
+  // queueLastFilled: {
+  //   type: Date,
+  //   required: true,
+  //   default: new Date().setHours(0, 0, 0, 0),
+  // },
+  // isActive: {
+  //   type: Boolean,
+  //   required: true,
+  //   default: true,
+  // },
+
 });
 
 // adds times to queue when medic is created

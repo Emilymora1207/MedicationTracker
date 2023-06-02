@@ -77,15 +77,17 @@ const styles = {
 function AddMed() {
     const [err, setErr] = useState(false);
 
+    const [weekQuestion, setWeekQuestion] = useState(false)
+    const [MonthQuestion, setMonthQuestion] = useState(false)
+
     const [formState, setFormState] = useState({
         name: '',
         dosage: '',
         amount: '',
         range: '',
-        subRange: '',
-        times: [],
+        everyOtherTime: '',
         userId: ''
-        
+
     });
 
     // const [checkPw, setCheckPw] = useState({
@@ -95,9 +97,9 @@ function AddMed() {
 
     const [addMed, { error, response }] = useMutation(ADD_MED);
 
-    const {loading, data} = useQuery(QUERY_ME);
+    const { loading, data } = useQuery(QUERY_ME);
     const userData = data?.me || {}
-    if (loading){
+    if (loading) {
         return <div></div>
     }
     console.log(userData)
@@ -140,13 +142,15 @@ function AddMed() {
                     <label style={styles.labels} for='range'>How often do you take your Medication? </label>
                     <div style={styles.selects}>
                         <select style={styles.inputs} name='subRange'>
-                            <option value='every'>Every</option>
-                            <option value='everyOther'>Every other</option>
+                            <option className='every'>Every</option>
+                            <option
+                                className='everyOther'
+                                value='true'>Every other</option>
                         </select>
                         <select style={styles.inputs} name='range'>
-                            <option value='daily'>Day</option>
-                            <option value='weekly'>Week</option>
-                            <option value='monthly'>Month</option>
+                            <option value='day'>Day</option>
+                            <option value='week'>Week</option>
+                            <option value='month'>Month</option>
                         </select>
                     </div>
                     <label style={styles.labels} for='amount'>How many times do you need to take this Medication? <br /><sub>if no set amount write 'N/A'</sub></label>
