@@ -28,7 +28,7 @@ const userSchema = new Schema(
     },
     medics: [{
       type: Schema.Types.ObjectId,
-      ref: 'medic',
+      ref: 'Medic',
     }]
   },
   {

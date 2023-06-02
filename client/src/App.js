@@ -73,7 +73,7 @@ function App() {
               element={<AllMeds medic={medic}/>}
               />
             <Route
-              path='/update'
+              path='/update/:id'
               element={<EditMed medic={medic}/>}
               />
             <Route

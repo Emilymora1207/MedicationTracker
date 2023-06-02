@@ -123,7 +123,7 @@ medicSchema.pre("findOneAndUpdate", async (next) => {
   next();
 });
 
-medicSchema.methods.fillQueue = async () => {
+medicSchema.methods.fillQueue = async function () {
   const initialDate = dayjs(this.queueLastFilled);
   const perviousDays = dayjs().diff(initialDate, "day");
   const subRange = this.subRange === "every" ? 1 : 2;
