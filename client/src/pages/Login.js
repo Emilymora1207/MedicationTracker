@@ -105,7 +105,7 @@ function Login(props) {
 
         // clear form values
         setFormState({
-            email: '',
+            username: '',
             password: '',
         });
     };
@@ -122,13 +122,13 @@ function Login(props) {
                 ) : (
                     <form onSubmit={handleFormSubmit} style={styles.form}>
                         <label
-                            style={styles.labels} for='email'>Email
+                            style={styles.labels} for='email'>Username
                         </label>
                         <input
                             type='text'
                             style={styles.inputs2} placeholder=''
-                            name='email'
-                            value={formState.email}
+                            name='username'
+                            value={formState.username}
                             onChange={handleChange}
                         />
                         <label

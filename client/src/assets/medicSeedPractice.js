@@ -22,4 +22,4 @@ const medic = [
     },
 ]
 
-export default medic;
+// export default medic;

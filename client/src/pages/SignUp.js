@@ -75,12 +75,15 @@ const styles = {
 }
 
 function SignUp() {
+    const [err, setErr] = useState(false);
+
     const [formState, setFormState] = useState({
         firstName: '',
         lastName: '',
         username: '',
         email: '',
         password: '',
+        confirmPw: '',
     });
 
     // const [checkPw, setCheckPw] = useState({
@@ -104,13 +107,18 @@ function SignUp() {
         console.log(formState);
 
         try {
+            if(formState.password !== formState.confirmPw) {
+                throw new Error('Passwords do not match')
+            }
             const { data } = await addUser({
                 variables: { ...formState },
             });
 
             Auth.login(data.addUser.token);
+            setErr(false);
         } catch (e) {
             console.error(e);
+            setErr(true)
         }
     };
 
@@ -126,7 +134,7 @@ function SignUp() {
                 {data ? (
                     <p>Congrats! You're signed up! </p>
                 ) : (
-                    <form style={styles.form}>
+                    <form onSubmit={handleFormSubmit} style={styles.form}>
                         <div style={styles.names}>
                             <div>
                                 <label
@@ -166,6 +174,17 @@ function SignUp() {
                         />
                         <label
                             style={styles.labels}
+                            for='username'>Username
+                        </label>
+                        <input
+                            type='text'
+                            style={styles.inputs}
+                            name='username'
+                            value={formState.username}
+                            onChange={handleChange}
+                        />
+                        <label
+                            style={styles.labels}
                             for='password'>Password
                         </label>
                         <input
@@ -176,21 +195,23 @@ function SignUp() {
                             onChange={handleChange}
                         // onChange={() => {setCheckPw({password: value})}}
                         />
-                        {/* <label
+                        <label
                             style={styles.labels}
                             for='confirmPw'>Confirm Password
                         </label>
                         <input
                             type='password'
                             style={styles.inputs}
-                            className='confirmPw'
+                            name='confirmPw'
                             onChange={handleChange}
-                            // value={checkPw.confirmPw}
+                            value={formState.confirmPw}
                         // onChange={() => {setCheckPw({confirmPw: value})
                         // if(checkPw.password === checkPw.confirmPw){
                         //     setCheckPw
-                        // }}}
-                        /> */}
+                    //     }
+                    // }}
+                        />
+                        {err ? (<p style={{color: 'red'}}>Passwords do not match</p>): (null)}
                         <button
                             style={styles.button}
                             className='signUp'

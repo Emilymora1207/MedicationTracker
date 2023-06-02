@@ -1,42 +1,72 @@
 [
   {
     "username": "Angelina",
-    "password": "password01"
+    "password": "password01",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Alexander",
-    "password": "password02"
+    "password": "password02",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Tom",
-    "password": "password03"
+    "password": "password03",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Kathy",
-    "password": "password04"
+    "password": "password04",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Bob",
-    "password": "password05"
+    "password": "password05",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Linda",
-    "password": "password06"
+    "password": "password06",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Horan",
-    "password": "password07"
+    "password": "password07",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Timothy",
-    "password": "password08"
+    "password": "password08",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Kity",
-    "password": "password09"
+    "password": "password09",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   },
   {
     "username": "Mike",
-    "password": "password10"
+    "password": "password10",
+    "firstName": "Emily",
+    "lastName": "Mora",
+    "email": "email@example.com"
   }
 ]
