@@ -1,3 +1,10 @@
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+// import medic from '../assets/medicSeedPractice'
+
+import { QUERY_MEDICS } from '../utils/queries';
+
+
 import logo from '../assets/Asset1.svg';
 
 const styles = {
@@ -51,7 +58,20 @@ const styles = {
         },
     }
 
-function TodaysMeds({ medic }) {
+function TodaysMeds() {
+    const { medicId } = useParams();
+
+    const { loading, data } = useQuery(QUERY_MEDICS, {
+      // pass URL parameter
+      variables: { medicId: medicId },
+    });
+  
+    const medic = data?.medic || [];
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
     return (
         <div style={styles.centered}>
             <h1>Today's Medication</h1>

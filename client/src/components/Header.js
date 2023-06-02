@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 // import { colors } from '../assets/colors';
 import Auth from '../utils/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../assets/Asset1.svg';
 
@@ -27,7 +27,7 @@ const styles = {
 
         display: 'flex',
         listStyleType: 'none',
-        width: '30%',
+        width: '40%',
         justifyContent: 'space-around',
         alignItems: 'center',
 
@@ -47,7 +47,9 @@ const styles = {
 
 
 function Header() {
-    // const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(true);
+    const location = useLocation();
+    console.log(location);
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();
@@ -58,7 +60,7 @@ function Header() {
                 <Link to='/' style={styles.homeLink}
                     className='link home-link'>
                     <img style={styles.logo} alt="logo" src={logo} />
-                    <h1>Medication Tracker</h1>
+                    <h1>Medication Tracker</ h1>
                 </Link>
 
                 {/* *********************need to add the auth login stuff once the back end is set up */}
@@ -74,15 +76,17 @@ function Header() {
                             className='link view-all-link'>
                             <li>View all Medication</li>
                         </Link>
-                        <a style={styles.eachLink}
+                        <Link to='/findPharmacy' style={styles.eachLink}><li>Find A Pharmacy</li></Link>
+                        <Link to='/login' style={styles.eachLink}
                             className='link account-link' onClick={logout}>
                             <li>Logout</li>
-                        </a>
+                        </Link>
                     </ul>
                 ) : (
                     <ul style={styles.links}>
                         <li style={styles.activeLink}>
-                            <Link to='/login' className="btn btn-lg btn-primary m-2">
+                            <Link onClick={() => setLoggedIn(true)}
+                            to='/login' className="btn btn-lg btn-primary m-2">
                                 Login
                             </Link>
                         </li>

@@ -1,3 +1,5 @@
+
+
 import logo from '../assets/Asset1.svg';
 
 const styles = {
@@ -70,6 +72,9 @@ const styles = {
 }
 
 function AddMed() {
+
+
+
     return (
         <div style={styles.container}>
             <h1>Add a New Medication</h1>

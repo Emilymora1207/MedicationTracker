@@ -2,6 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Medic } = require("../models");
 const { signToken } = require("../utils/auth");
 const { updateQueue } = require("../utils/updateQueue");
+const { default: medic } = require("../../client/src/assets/medicSeedPractice");
 
 const resolvers = {
   Query: {
@@ -9,13 +10,13 @@ const resolvers = {
     medic: async (parent, { medicId }, context) => {
       if (!context.user)
         throw new AuthenticationError("You should be logged in!");
-      return Medic.findOne({ _id: medicId, userId: context.user._id });
+      return User.findOne({ _id: context.user._id, medic: {$contains: medicId} }).populate('medic');
     },
     // gets all medics matching userId using context
     medics: async (parent, args, context) => {
       if (!context.user)
         throw new AuthenticationError("You should be logged in!");
-      const userMedics = await Medic.find({ userId: context.user._id });
+      const userMedics = await User.find({ _id: context.user._id }).populate('medic');
       // updates queue array of each medics
       const updatedMedics = await updateQueue(userMedics);
 
@@ -24,8 +25,8 @@ const resolvers = {
   },
   Mutation: {
     // adds new user and signs token
-    addUser: async (parent, { username, password }) => {
-      const user = await User.create({ username, password });
+    addUser: async (parent, { firstName, lastName, email, username, password }) => {
+      const user = await User.create({ firstName, lastName, email,username, password });
       const token = signToken(user);
       return { token, user };
     },
