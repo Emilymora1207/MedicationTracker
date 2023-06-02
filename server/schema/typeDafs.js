@@ -50,6 +50,7 @@ const typeDefs = gql`
   type Query {
     getMedic(medicId: ID!): Medic
     medics: User
+    me: User
   }
 
   type Mutation {

@@ -23,6 +23,12 @@ const resolvers = {
       console.log(userMedics[0].medics);
       return userMedics[0];
     },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
   Mutation: {
     // adds new user and signs token
