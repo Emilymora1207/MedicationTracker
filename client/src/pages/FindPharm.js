@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import GoogleMapReact from "google-map-react"
-import { GOOGLE_MAP_API_KEY, MAX_RADIUS } from "../../constants/common"
+import { GOOGLE_MAP_API_KEY, MAX_RADIUS } from "../constants/common"
 import NearbyForm from "./NearbyForm"
 import PlaceCard from "./PlaceCard"
 import { Typewriter } from "react-simple-typewriter"
