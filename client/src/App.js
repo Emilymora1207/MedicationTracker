@@ -15,7 +15,11 @@ import SignUp from './pages/SignUp';
 import TodaysMeds from './pages/TodaysMeds';
 import AllMeds from './pages/AllMeds';
 import EditMed from './pages/EditMed';
-import FindPharm from './pages/FindPharm'
+import FindPharm from './pages/FindPharm';
+import "./styles/FindPharm.css"
+import NearByForm from './pages/NearbyForm';
+import  ErrorBoundary  from './components/common/ErrorBoundary';
+import PlaceCard from './pages/PlaceCard';
 // **********************will need to delete once conttected to back end******
 import medic from './assets/medicSeedPractice';
 
@@ -80,6 +84,19 @@ function App() {
               path='/findPharmacy'
               element={<FindPharm/>}
               />
+              <Route
+              path='nearbyForm'
+              element={<NearByForm/>}
+              />
+               <Route
+              path='errorBoundary'
+              element={<ErrorBoundary/>}
+              />
+              <Route
+              path='placecard'
+              element={<PlaceCard/>}
+              />
+              
           </Routes>
         </div>
       </Router>

@@ -4,6 +4,7 @@ import { GOOGLE_MAP_API_KEY, MAX_RADIUS } from "../constants/common"
 import NearbyForm from "./NearbyForm"
 import PlaceCard from "./PlaceCard"
 import { Typewriter } from "react-simple-typewriter"
+import "../styles/FindPharm.css"
 
 
 const FindPharm = () => {
@@ -148,7 +149,6 @@ const FindPharm = () => {
             yesIWantToUseGoogleMapApiInternals={true}
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
             data-test="map"
-            
           >
             {results.data &&
               results.data.map(result => (
