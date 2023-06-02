@@ -59,6 +59,8 @@ const styles = {
     }
 
 function TodaysMeds() {
+
+    
     const { medicId } = useParams();
 
     const { loading, data } = useQuery(QUERY_MEDICS, {

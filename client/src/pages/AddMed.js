@@ -1,4 +1,7 @@
-
+import { ADD_MED } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
+import { useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 
 import logo from '../assets/Asset1.svg';
 
@@ -72,8 +75,57 @@ const styles = {
 }
 
 function AddMed() {
+    const [err, setErr] = useState(false);
 
+    const [formState, setFormState] = useState({
+        name: '',
+        dosage: '',
+        amount: '',
+        range: '',
+        subRange: '',
+        times: [],
+        userId: ''
+        
+    });
 
+    // const [checkPw, setCheckPw] = useState({
+    //     password: '',
+    //     confirmPw: '',
+    // })
+
+    const [addMed, { error, response }] = useMutation(ADD_MED);
+
+    const {loading, data} = useQuery(QUERY_ME);
+    const userData = data?.me || {}
+    if (loading){
+        return <div></div>
+    }
+    console.log(userData)
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+
+        try {
+            const { response } = await addMed({
+                variables: { ...formState },
+            });
+
+            setErr(false);
+        } catch (e) {
+            console.error(e);
+            setErr(true)
+        }
+    };
 
     return (
         <div style={styles.container}>
@@ -82,9 +134,9 @@ function AddMed() {
             {/* adds the gradient border */}
             <div style={styles.addMed}>
                 <div style={styles.borderSides}></div>
-                <form style={styles.form}>
+                <form onSubmit={handleFormSubmit} style={styles.form}>
                     <label style={styles.labels} for='medName'>Medication Name: </label>
-                    <input style={styles.inputs} type='text' name='medName' />
+                    <input onChange={handleChange} style={styles.inputs} type='text' name='medName' />
                     <label style={styles.labels} for='range'>How often do you take your Medication? </label>
                     <div style={styles.selects}>
                         <select style={styles.inputs} name='subRange'>
