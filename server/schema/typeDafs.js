@@ -8,7 +8,7 @@ const typeDefs = gql`
     lastName: String!
     email: String!
     password: String!
-    medic: Medic
+    medics: [Medic]
   }
   type Medic {
     _id: ID!
@@ -48,8 +48,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    medic(medicId: ID!): Medic
-    medics: [Medic]
+    getMedic(medicId: ID!): Medic
+    medics: User
   }
 
   type Mutation {

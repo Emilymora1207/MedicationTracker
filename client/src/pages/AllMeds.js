@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_MEDICS } from '../utils/queries';
@@ -118,8 +118,8 @@ function AllMeds() {
         // pass URL parameter
         variables: { medicId: medicId },
       });
-
-      const medic = data?.medic || [];
+      console.log(data);
+      const medic = data?.medics.medics || [];
 
       if (loading) {
         return <div>Loading...</div>;
@@ -140,7 +140,7 @@ function AllMeds() {
                                 <h3 style={styles.margins}>{medic.name}</h3>
                                 <p style={styles.margins}>{medic.dosage}</p>
                                 <div style={styles.buttons}>
-                                    <button style={styles.button} className={`update-${medic.name}`}>Update</button>
+                                    <Link to={`/update/${medic._id}`}> <button style={styles.button} className={`update-${medic.name}`}>Update</button></Link>
                                     {/* <button
                                         onClick={() => setDeletePopup(true)}
                                         style={styles.buttonGrey}

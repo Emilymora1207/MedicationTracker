@@ -1,4 +1,8 @@
 import logo from '../assets/Asset1.svg';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+
+import { QUERY_SINGLE_MEDIC } from '../utils/queries';
 
 const styles = {
     centered: {
@@ -69,8 +73,19 @@ const styles = {
     }
 }
 
-function EditMed({ medic }) {
+function EditMed() {
+    const { id } = useParams()
 
+    const { loading, data } = useQuery(QUERY_SINGLE_MEDIC, {
+        // pass URL parameter
+        variables: { medicId: id },
+      });
+      console.log(data);
+      const medic = data?.getMedic || {};
+      console.log(medic)
+      if (loading) {
+        return <div>Loading...</div>;
+      }
     return (
         <div style={styles.centered}>
             <h1>Update Medication</h1>
@@ -80,23 +95,23 @@ function EditMed({ medic }) {
                 <div style={styles.borderSides}></div>
                 <form style={styles.form}>
                     <label style={styles.labels} for='medName'>Medication Name: </label>
-                    <input defaultValue={medic[0].name} style={styles.inputs} type='text' name='medName' />
+                    <input defaultValue={medic.name} style={styles.inputs} type='text' name='medName' />
                     <label style={styles.labels} for='range'>How often do you take your Medication? </label>
                     <div style={styles.selects}>
-                        <select defaultValue={medic[0].subRange} style={styles.inputs} name='subRange'>
+                        <select defaultValue={medic.subRange} style={styles.inputs} name='subRange'>
                             <option value='every'>Every</option>
                             <option value='every other'>Every other</option>
                         </select>
-                        <select defaultValue={medic[0].range} style={styles.inputs} name='range'>
-                            <option value='daily'>Day</option>
+                        <select defaultValue={medic.range} style={styles.inputs} name='range'>
+                        <option selected={medic.range === 'daily'} value='daily'>Day</option>
                             <option value='weekly'>Week</option>
                             <option value='monthly'>Month</option>
                         </select>
                     </div>
                     <label style={styles.labels} for='amount'>How many times do you need to take this Medication? <br /><sub>if no set amount write 'N/A'</sub></label>
-                    <input defaultValue={medic[0].amount || ''} style={styles.inputs} type='text' placeholder='i.e. "30"' name='amount' />
+                    <input defaultValue={medic.amount || ''} style={styles.inputs} type='text' placeholder='i.e. "30"' name='amount' />
                     <label style={styles.labels} for='dosage'>What dosage do you take?</label>
-                    <input defaultValue={medic[0].dosage} style={styles.inputs} type='text' placeholder='i.e. "450mg"' name='dosage' />
+                    <input defaultValue={medic.dosage} style={styles.inputs} type='text' placeholder='i.e. "450mg"' name='dosage' />
                     <button style={styles.button} className='addMed'>Update</button>
                 </form>
                 {/* adds the gradient border */}

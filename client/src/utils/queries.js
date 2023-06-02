@@ -12,8 +12,15 @@ export const QUERY_USERS = gql`
 
 export const QUERY_SINGLE_MEDIC = gql`
   query singleMedic($medicId: ID!) {
-    medic(medicId: $medicId) {
-      medic
+    getMedic(medicId: $medicId) {
+      _id
+      name
+      dosage
+      amount
+      range
+      subRange
+      times
+      isActive
     }
   }
 `;
@@ -21,7 +28,16 @@ export const QUERY_SINGLE_MEDIC = gql`
 export const QUERY_MEDICS = gql`
   query allMedics {
     medics {
-      medic
+      medics {
+        _id
+        name
+        dosage
+        amount
+        range
+        subRange
+        times
+        isActive
+      }
     }
   }
 `;

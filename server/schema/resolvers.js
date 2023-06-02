@@ -7,20 +7,21 @@ const { default: medic } = require("../../client/src/assets/medicSeedPractice");
 const resolvers = {
   Query: {
     // gets specific medic matching medicId and userId using context
-    medic: async (parent, { medicId }, context) => {
+    getMedic: async (parent, { medicId }, context) => {
       if (!context.user)
         throw new AuthenticationError("You should be logged in!");
-      return User.findOne({ _id: context.user._id, medic: {$contains: medicId} }).populate('medic');
+      return Medic.findOne({ _id: medicId});
     },
     // gets all medics matching userId using context
     medics: async (parent, args, context) => {
+      console.log(context.user)
       if (!context.user)
         throw new AuthenticationError("You should be logged in!");
-      const userMedics = await User.find({ _id: context.user._id }).populate('medic');
+      const userMedics = await User.find({ _id: context.user._id }).populate({path:'medics', select:'-__v'});
       // updates queue array of each medics
-      const updatedMedics = await updateQueue(userMedics);
-
-      return updatedMedics;
+      // const updatedMedics = await updateQueue(userMedics);
+      console.log(userMedics[0].medics);
+      return userMedics[0];
     },
   },
   Mutation: {
