@@ -1,22 +1,22 @@
-import React, { useState } from "react"
-import Switch from "../common/Switch"
-import TextInput from "../common/TextInput"
-import Dropdown from "../common/Dropdown"
-import Button from "../common/Button"
-import { AVAILABLE_PLACE_TYPES } from "../../constants/common"
+import React, { useState } from "react";
+import Switch from "../components/common/Switch";
+import TextInput from "../components/common/TextInput";
+import Dropdown from "../components/common/Dropdown";
+import Button from "../components/common/Button";
+import { AVAILABLE_PLACE_TYPES } from "../constants/common";
 
 const NearByForm = ({ onSubmit, isLoading }) => {
   const [formData, setFormData] = useState({
-    type: AVAILABLE_PLACE_TYPES[0].value
-  })
+    type: AVAILABLE_PLACE_TYPES[0].value,
+  });
 
   const submitForm = () => {
-    onSubmit(formData)
-  }
+    onSubmit(formData);
+  };
 
   const setValue = (key, value) => {
-    setFormData({ ...formData, [key]: value || undefined })
-  }
+    setFormData({ ...formData, [key]: value || undefined });
+  };
 
   return (
     <div className="side-container" data-test="nearbyForm">
@@ -28,7 +28,7 @@ const NearByForm = ({ onSubmit, isLoading }) => {
           valueKey="value"
           options={AVAILABLE_PLACE_TYPES}
           placeholder="Select Type"
-          onChange={value => setValue("type", value)}
+          onChange={(value) => setValue("type", value)}
           data-test="nearbyFormDD"
         />
       </div>
@@ -37,7 +37,7 @@ const NearByForm = ({ onSubmit, isLoading }) => {
           id="keyword-input"
           name="keyword"
           placeholder="Enter Keyword (Optional)"
-          onChange={value => setValue("searchKey", value)}
+          onChange={(value) => setValue("searchKey", value)}
           data-test="nearbyFormTextInput"
         />
       </div>
@@ -47,7 +47,7 @@ const NearByForm = ({ onSubmit, isLoading }) => {
           id="is-open-only-switch"
           defaultChecked={false}
           name="isOpenOnly"
-          onChange={value => setValue("opennow", value)}
+          onChange={(value) => setValue("opennow", value)}
           switchText={["Yes", "No"]}
           data-test="nearbyFormSwitch"
         />
@@ -61,7 +61,7 @@ const NearByForm = ({ onSubmit, isLoading }) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NearByForm
+export default NearByForm;
