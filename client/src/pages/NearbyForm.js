@@ -1,9 +1,9 @@
 import React, { useState } from "react"
-import Switch from "../common/Switch"
-import TextInput from "../common/TextInput"
-import Dropdown from "../common/Dropdown"
-import Button from "../common/Button"
-import { AVAILABLE_PLACE_TYPES } from "../../constants/common"
+import Switch from "../components/common/Switch"
+import TextInput from "../components/common/TextInput"
+import Dropdown from "../components/common/Dropdown"
+import Button from "../components/common/Button"
+import { AVAILABLE_PLACE_TYPES } from "../constants/common"
 
 const NearByForm = ({ onSubmit, isLoading }) => {
   const [formData, setFormData] = useState({
