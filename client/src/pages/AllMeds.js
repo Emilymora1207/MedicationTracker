@@ -15,10 +15,12 @@ const styles = {
         justifyContent: 'center',
         flexDirection: 'column',
         alignItems: 'center'
+        
     },
     allMeds: {
         width: '60%',
         display: 'flex',
+        justifyContent: 'center',
     },
     outsideForm: {
 
