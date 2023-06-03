@@ -112,7 +112,7 @@ const styles = {
 function AllMeds() {
 
 
-    const [deletePopup, setDeletePopup] = useState(false);
+    // const [deletePopup, setDeletePopup] = useState(false);
     // Use `useParams()` to retrieve value of the route parameter `:profileId`
       const { medicId } = useParams();
 
