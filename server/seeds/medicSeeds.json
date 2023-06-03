@@ -2,14 +2,12 @@
   {
     "name": "Xanax",
     "amount": 10,
-    "range": "daily",
-    "times": ["09:30", "02:30"]
+    "range": "daily"
   },
   {
     "name": "Klonopin",
     "amount": 20,
-    "range": "weekly",
-    "times": ["11:30", "04:30"]
+    "range": "weekly"
   },
   {
     "name": "Valium",
