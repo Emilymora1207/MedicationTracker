@@ -34,9 +34,9 @@ export const QUERY_MEDICS = gql`
         dosage
         amount
         range
-        subRange
-        times
-        isActive
+        everyOtherTime
+        dayOfWeek
+        dayOfMonth
       }
     }
   }

@@ -1,11 +1,14 @@
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import dayjs from 'dayjs';
 // import medic from '../assets/medicSeedPractice'
 
 import { QUERY_MEDICS } from '../utils/queries';
+import { UPDATE_MED } from '../utils/mutations';
 
 
 import logo from '../assets/Asset1.svg';
+import { useState } from 'react';
 
 const styles = {
     centered: {
@@ -50,30 +53,63 @@ const styles = {
         height: '20px',
         width: '20px',
         border: '2px, black, solid',
-        borderRadius: '50%', 
+        borderRadius: '50%',
         background: 'white',
         ':focus': {
             color: 'rgb(150, 239, 116)'
         }
-        },
-    }
+    },
+}
 
 function TodaysMeds() {
 
-    
     const { medicId } = useParams();
 
     const { loading, data } = useQuery(QUERY_MEDICS, {
-      // pass URL parameter
-      variables: { medicId: medicId },
+        // pass URL parameter
+        variables: { medicId: medicId },
     });
-  
+
     const medic = data?.medic || [];
-  
+
     if (loading) {
-      return <div>Loading...</div>;
+        return <div>Loading...</div>;
     }
 
+    const [medicForToday, setMedicForToday] = useState([])
+    const [formState, setFormState] = useState({
+        amount: '',
+        everyOtherTime: ''
+    })
+    for (let i = 0; i < medic.length; i++) {
+        
+        if (medic[i].everyOtherTime !== null) {
+            setFormState.everyOtherTime(!medic[i].everyOtherTime)
+        }
+            if (medic[i].everyOtherTime !== false && (medic.range === 'day' || (medic.range === 'week' && dayjs().day() === dayjs().day(medic[i].dayOfWeek)) || (medic.range === 'month' && dayjs().date() === dayjs().date(medic[i].dayOfMonth)))) {
+            setMedicForToday.push(medic[i])
+            setFormState.amount(medic[i].amount - 1);
+
+            const [updateMed, { error, data }] = useMutation(UPDATE_MED)
+            const updateAmountAndEOT = async () => {
+            try {
+                if(formState.password !== formState.confirmPw) {
+                    throw new Error('Passwords do not match')
+                }
+                const { data } = await updateMed({
+                    variables: { ...formState },
+                });
+    
+                Auth.login(data.addUser.token);
+                setErr(false);
+            } catch (e) {
+                console.error(e);
+                setErr(true)
+            }
+        }
+        updateAmountAndEOT()
+        }
+    }
     return (
         <div style={styles.centered}>
             <h1>Today's Medication</h1>
@@ -81,7 +117,7 @@ function TodaysMeds() {
             <div style={styles.todaysMeds}>
                 <div style={styles.borderSides}></div>
                 <form style={styles.form}>
-                    {medic.map((medic) => (
+                    {medicForToday.map((medic) => (
                         <div style={styles.eachMed}>
                             <label id={medic.name} style={styles.label}>
                                 <h3>{medic.name}</h3>

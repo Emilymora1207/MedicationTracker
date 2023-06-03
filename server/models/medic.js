@@ -22,16 +22,10 @@ const medicSchema = new Schema({
   },
   range: {
     type: String,
-    enum: ["daily", "weekly", "monthly"],
+    enum: ["day", "week", "month"],
     default: "daily",
     required: true,
   },
-  // subRange: {
-  //   type: String,
-  //   enum: ["every", "every other"],
-  //   default: "every",
-  //   required: true,
-  // },
   everyOtherTime: {
     type: Boolean
   },
