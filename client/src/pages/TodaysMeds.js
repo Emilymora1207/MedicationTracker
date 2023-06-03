@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
+
 import dayjs from 'dayjs';
 // import medic from '../assets/medicSeedPractice'
 
@@ -8,7 +10,6 @@ import { UPDATE_MED } from '../utils/mutations';
 
 
 import logo from '../assets/Asset1.svg';
-import { useState } from 'react';
 
 const styles = {
     centered: {
@@ -62,7 +63,13 @@ const styles = {
 }
 
 function TodaysMeds() {
-
+    const [err, setErr] = useState(false)
+    const [medicForToday, setMedicForToday] = useState([])
+    const [formState, setFormState] = useState({
+        amount: '',
+        everyOtherTime: ''
+    })
+    
     const { medicId } = useParams();
 
     const { loading, data } = useQuery(QUERY_MEDICS, {
@@ -76,38 +83,34 @@ function TodaysMeds() {
         return <div>Loading...</div>;
     }
 
-    const [medicForToday, setMedicForToday] = useState([])
-    const [formState, setFormState] = useState({
-        amount: '',
-        everyOtherTime: ''
-    })
+
     for (let i = 0; i < medic.length; i++) {
-        
+
         if (medic[i].everyOtherTime !== null) {
             setFormState.everyOtherTime(!medic[i].everyOtherTime)
         }
             if (medic[i].everyOtherTime !== false && (medic.range === 'day' || (medic.range === 'week' && dayjs().day() === dayjs().day(medic[i].dayOfWeek)) || (medic.range === 'month' && dayjs().date() === dayjs().date(medic[i].dayOfMonth)))) {
-            setMedicForToday.push(medic[i])
-            setFormState.amount(medic[i].amount - 1);
-
-            const [updateMed, { error, data }] = useMutation(UPDATE_MED)
-            const updateAmountAndEOT = async () => {
-            try {
-                if(formState.password !== formState.confirmPw) {
-                    throw new Error('Passwords do not match')
-                }
-                const { data } = await updateMed({
-                    variables: { ...formState },
-                });
+                setMedicForToday.push(medic[i])
+        //         setFormState.amount(medic[i].amount - 1);
     
-                Auth.login(data.addUser.token);
-                setErr(false);
-            } catch (e) {
-                console.error(e);
-                setErr(true)
-            }
-        }
-        updateAmountAndEOT()
+
+        //         const [updateMed, { error, data }] = useMutation(UPDATE_MED)
+
+        //     const updateAmountAndEOT = async () => {
+
+        //     try {
+        //         const { data } = await updateMed({
+        //             variables: { ...formState },
+        //         });
+    
+        //         Auth.login(data.addUser.token);
+        //         setErr(false);
+        //     } catch (e) {
+        //         console.error(e);
+        //         setErr(true)
+        //     }
+        // }
+        // updateAmountAndEOT()
         }
     }
     return (

@@ -1,6 +1,7 @@
 import logo from '../assets/Asset1.svg';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
+import { useState } from 'react';
 
 import { UPDATE_MED } from '../utils/mutations';
 import { QUERY_SINGLE_MEDIC } from '../utils/queries';
@@ -75,6 +76,7 @@ const styles = {
 }
 
 function EditMed() {
+    const [err, setErr] = useState(false)
     const { id } = useParams()
     // grabbing the medication to update
     const { loading, data } = useQuery(QUERY_SINGLE_MEDIC, {
@@ -88,7 +90,6 @@ function EditMed() {
         return <div>Loading...</div>;
     }
     //updating the medication 
-    const [err, setErr] = useState(false);
 
     const [weekQuestion, setWeekQuestion] = useState(false)
     const [MonthQuestion, setMonthQuestion] = useState(false)
@@ -108,15 +109,18 @@ function EditMed() {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        if (event.target.value === 'week') {
+        if (value === 'week') {
             setWeekQuestion(true)
             setMonthQuestion(false)
-        } else if (event.target.value === 'month') {
+            return value
+        } else if (value === 'month') {
             setMonthQuestion(true)
             setWeekQuestion(false)
-        } else if (event.target.value === 'day') {
+            return value
+        } else if (value === 'day') {
             setWeekQuestion(false);
             setMonthQuestion(false);
+            return value
         }
 
         setFormState({
