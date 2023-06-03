@@ -5,6 +5,7 @@ import NearbyForm from "./NearbyForm"
 import PlaceCard from "./PlaceCard"
 import { Typewriter } from "react-simple-typewriter"
 import "../styles/FindPharm.css"
+// import {MarkerF} from '@react-google-maps/api'
 
 
 const FindPharm = () => {
@@ -153,6 +154,7 @@ const FindPharm = () => {
             {results.data &&
               results.data.map(result => (
                 <Marker {...result} key={result.id} />
+                
               ))}
           </GoogleMapReact>
         )}
