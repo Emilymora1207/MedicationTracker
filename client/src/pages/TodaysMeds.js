@@ -88,6 +88,7 @@ dispatch(setAutomaticRefresh(false))
         setNow(dayjs().format(MM/DD/YYYY))
         setCheckThen(localStorage.getItem('then'))
     }
+    // useEffect to check if a page has been loaded today and only load a new page if its a new day
     useEffect(
         () => {
             checkLastReload();
@@ -96,19 +97,22 @@ dispatch(setAutomaticRefresh(false))
                localStorage.setItem('then', then);
                window.location.reload();
             }
+            setGetTodaysChecked(localStorage.getItem("selectedMeds", JSON.stringify(todaysChecked)));
         },[]
     )
 
 //persists the checked boxes on a checklist 
-const [todaysCheckList, setTodaysChecklist] = useState(
-    localStorage.getItem("selectedMeds") == null
-      ? ""
-      : JSON.parse(localStorage.getItem("selectedMeds"))
+const [todaysChecked, setTodaysChecked] = useState()
+const [getTodaysChecked, setGetTodaysChecked] = useState();
+
+setTodaysChecked(
+    localStorage.setItem("selectedMeds", )
+    
   );
 
   useEffect(() => {
-    localStorage.setItem("selectedMeds", JSON.stringify(todaysCheckList));
-  }, [todaysCheckList]);  
+    setTodaysChecked(localStorage.getItem("selectedMeds", JSON.stringify(todaysChecked)));
+  });  
 
 
     const { medicId } = useParams();
