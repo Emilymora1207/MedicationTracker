@@ -97,22 +97,26 @@ dispatch(setAutomaticRefresh(false))
                localStorage.setItem('then', then);
                window.location.reload();
             }
-            setGetTodaysChecked(localStorage.getItem("selectedMeds", JSON.stringify(todaysChecked)));
+            setGetTodaysChecked(localStorage.getItem("checkedMeds"));
         },[]
     )
 
 //persists the checked boxes on a checklist 
-const [todaysChecked, setTodaysChecked] = useState()
+const [todaysChecked, setTodaysChecked] = useState([])
 const [getTodaysChecked, setGetTodaysChecked] = useState();
 
-setTodaysChecked(
-    localStorage.setItem("selectedMeds", )
-    
-  );
+const handleCheckedMeds = (name) => {
+    setTodaysChecked.push(name)
+    localStorage.setItem('checkedMeds', todaysChecked)
+}
 
-  useEffect(() => {
-    setTodaysChecked(localStorage.getItem("selectedMeds", JSON.stringify(todaysChecked)));
-  });  
+// setTodaysChecked(
+//     localStorage.setItem("selectedMeds", )
+//   );
+
+//   useEffect(() => {
+//     setTodaysChecked(localStorage.getItem("checkedMeds", JSON.stringify(todaysChecked)));
+//   });  
 
 
     const { medicId } = useParams();
@@ -167,7 +171,7 @@ setTodaysChecked(
                                 <h3>{medic.name}</h3>
                                 <p>{medic.dosage}</p>
                             </label>
-                            <input htmlfor={medic.name} type='checkbox' style={styles.checkbox} />
+                            <input onChange={handleCheckedMeds(medic.name)} checked={getTodaysChecked.includes({'checkedMeds': medic.name})} htmlfor={medic.name} type='checkbox' style={styles.checkbox} />
                         </div>
                     ))}
                 </form>
