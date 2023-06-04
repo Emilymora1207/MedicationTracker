@@ -88,6 +88,7 @@ dispatch(setAutomaticRefresh(false))
         setNow(dayjs().format(MM/DD/YYYY))
         setCheckThen(localStorage.getItem('then'))
     }
+    // useEffect to check if a page has been loaded today and only load a new page if its a new day
     useEffect(
         () => {
             checkLastReload();
@@ -96,19 +97,26 @@ dispatch(setAutomaticRefresh(false))
                localStorage.setItem('then', then);
                window.location.reload();
             }
+            setGetTodaysChecked(localStorage.getItem("checkedMeds"));
         },[]
     )
 
 //persists the checked boxes on a checklist 
-const [todaysCheckList, setTodaysChecklist] = useState(
-    localStorage.getItem("selectedMeds") == null
-      ? ""
-      : JSON.parse(localStorage.getItem("selectedMeds"))
-  );
+const [todaysChecked, setTodaysChecked] = useState([])
+const [getTodaysChecked, setGetTodaysChecked] = useState();
 
-  useEffect(() => {
-    localStorage.setItem("selectedMeds", JSON.stringify(todaysCheckList));
-  }, [todaysCheckList]);  
+const handleCheckedMeds = (name) => {
+    setTodaysChecked.push(name)
+    localStorage.setItem('checkedMeds', todaysChecked)
+}
+
+// setTodaysChecked(
+//     localStorage.setItem("selectedMeds", )
+//   );
+
+//   useEffect(() => {
+//     setTodaysChecked(localStorage.getItem("checkedMeds", JSON.stringify(todaysChecked)));
+//   });  
 
 
     const { medicId } = useParams();
@@ -163,7 +171,7 @@ const [todaysCheckList, setTodaysChecklist] = useState(
                                 <h3>{medic.name}</h3>
                                 <p>{medic.dosage}</p>
                             </label>
-                            <input htmlfor={medic.name} type='checkbox' style={styles.checkbox} />
+                            <input onChange={handleCheckedMeds(medic.name)} checked={getTodaysChecked.includes({'checkedMeds': medic.name})} htmlfor={medic.name} type='checkbox' style={styles.checkbox} />
                         </div>
                     ))}
                 </form>
