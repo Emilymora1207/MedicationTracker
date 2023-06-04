@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
+import { setAutomaticRefresh } from 'react-admin';
+import { useDispatch } from 'react-redux';
+
+
 
 import dayjs from 'dayjs';
 // import medic from '../assets/medicSeedPractice'
@@ -63,25 +67,50 @@ const styles = {
 }
 
 function TodaysMeds() {
-    window.location.reload(false)
+    const dispatch = useDispatch();
+dispatch(setAutomaticRefresh(false))
+    // window.location.reload(false)
+
+
+    // const [err, setErr] = useState(false)
+    // const [medicForToday, setMedicForToday] = useState([])
+    // const [formState, setFormState] = useState({
+    //     amount: '',
+    //     everyOtherTime: ''
+    // })
+
+    //only reloads the page once a day
     const [then, setThen] = useState();
     const [now, setNow] = useState();
+    const [checkThen, setCheckThen] = useState();
 
-    const [err, setErr] = useState(false)
-    const [medicForToday, setMedicForToday] = useState([])
-    const [formState, setFormState] = useState({
-        amount: '',
-        everyOtherTime: ''
-    })
     const checkLastReload = () => {
         setNow(dayjs().format(MM/DD/YYYY))
-        if (now !== then || then === null) {
-            setThen(dayjs().format(MM/DD/YYYY))
-            window.location.reload(true)
-        }
+        setCheckThen(localStorage.getItem('then'))
     }
+    useEffect(
+        () => {
+            checkLastReload();
+            if (now !== checkThen || checkThen === null) {
+                setThen(dayjs().format(MM/DD/YYYY))
+               localStorage.setItem('then', then);
+               window.location.reload();
+            }
+        },[]
+    )
 
-    
+//persists the checked boxes on a checklist 
+const [todaysCheckList, setTodaysChecklist] = useState(
+    localStorage.getItem("selectedMeds") == null
+      ? ""
+      : JSON.parse(localStorage.getItem("selectedMeds"))
+  );
+
+  useEffect(() => {
+    localStorage.setItem("selectedMeds", JSON.stringify(todaysCheckList));
+  }, [todaysCheckList]);  
+
+
     const { medicId } = useParams();
 
     const { loading, data } = useQuery(QUERY_MEDICS, {
