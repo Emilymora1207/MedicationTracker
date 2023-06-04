@@ -1,5 +1,5 @@
 import logo from '../assets/Asset1.svg';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { useState } from 'react';
 
@@ -52,6 +52,23 @@ const styles = {
         textAlign: 'left',
         margin: '15px 0'
     },
+    buttonGrey: {
+        margin: '5px',
+        cursor: 'pointer',
+        fontWeight: '600',
+        color: '#fff',
+        fontSize: '14px',
+        height: '38px',
+        padding: '8px 24px',
+        borderRadius: '50px',
+        backgroundImage: 'linear-gradient(45deg, rgb(115, 115, 115) ,rgb(160, 160, 160))',
+        border: 'none',
+        boxShadow: '0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%)',
+        transition: 'all .2s ease-out',
+        ':hover': {
+            boxShadow: '0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%)',
+        }
+    },
     button: {
         cursor: 'pointer',
         fontWeight: '600',
@@ -67,6 +84,11 @@ const styles = {
         ':hover': {
             boxShadow: '0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%)',
         }
+    },
+    buttons: {
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'right'
     },
     borderSides: {
         width: '1.2%',
@@ -95,13 +117,13 @@ function EditMed() {
     const [MonthQuestion, setMonthQuestion] = useState(false)
 
     const [formState, setFormState] = useState({
-        name: '',
-        dosage: '',
-        amount: '',
-        range: '',
-        everyOtherTime: '',
-        dayOfWeek: '',
-        dayOfMonth: '',
+        name: medic.name,
+        dosage: medic.dosage,
+        amount: medic.amount,
+        range: medic.range,
+        everyOtherTime: medic.everyOtherTime || null,
+        dayOfWeek: medic.dayOfWeek || null,
+        dayOfMonth: medic.dayOfMonth || null,
     });
 
     const [updateMed, { error, response }] = useMutation(UPDATE_MED);
@@ -329,9 +351,17 @@ function EditMed() {
                         type='text'
                         placeholder='i.e. "450mg"'
                         name='dosage' />
+                    <div style={styles.buttons}>
                     <button
+                        type='submit'
                         style={styles.button}
                         className='addMed'>Update</button>
+                        <Link to='/allMeds'>
+                        <button 
+                            type='cancel'
+                            style={styles.buttonGrey}></button>
+                           </Link> 
+                    </div>
                 </form>
                 {/* adds the gradient border */}
                 <div style={styles.borderSides}></div>
