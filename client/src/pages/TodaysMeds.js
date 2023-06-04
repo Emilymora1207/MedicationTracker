@@ -67,17 +67,9 @@ const styles = {
 }
 
 function TodaysMeds() {
-    const dispatch = useDispatch();
-dispatch(setAutomaticRefresh(false))
+//     const dispatch = useDispatch();
+// dispatch(setAutomaticRefresh(false))
     // window.location.reload(false)
-
-
-    // const [err, setErr] = useState(false)
-    // const [medicForToday, setMedicForToday] = useState([])
-    // const [formState, setFormState] = useState({
-    //     amount: '',
-    //     everyOtherTime: ''
-    // })
 
     //only reloads the page once a day
     const [then, setThen] = useState();
@@ -97,6 +89,7 @@ dispatch(setAutomaticRefresh(false))
                localStorage.setItem('then', then);
                window.location.reload();
             }
+            //might need to be put in another useEffect because this one will only be loaded once a day 
             setGetTodaysChecked(localStorage.getItem("checkedMeds"));
         },[]
     )
@@ -109,14 +102,6 @@ const handleCheckedMeds = (name) => {
     setTodaysChecked.push(name)
     localStorage.setItem('checkedMeds', todaysChecked)
 }
-
-// setTodaysChecked(
-//     localStorage.setItem("selectedMeds", )
-//   );
-
-//   useEffect(() => {
-//     setTodaysChecked(localStorage.getItem("checkedMeds", JSON.stringify(todaysChecked)));
-//   });  
 
 
     const { medicId } = useParams();
@@ -131,13 +116,23 @@ const handleCheckedMeds = (name) => {
     if (loading) {
         return <div>Loading...</div>;
     }
+
+    const [err, setErr] = useState(false)
+    const [medicForToday, setMedicForToday] = useState([])
+    const [formState, setFormState] = useState({
+        amount: '',
+        everyOtherTime: ''
+    })
+
     const [updateMed, { error, response }] = useMutation(UPDATE_MED)
 
+//goes through all the medication for that user and pulls only the ones needed for today 
     for (let i = 0; i < medic.length; i++) {
 
         if (medic[i].everyOtherTime !== null) {
             setFormState.everyOtherTime(!medic[i].everyOtherTime)
         }
+        // only if daily, or if monthly or weekly matched today on dayjs
             if (medic[i].everyOtherTime !== false && (medic.range === 'day' || (medic.range === 'week' && dayjs().day() === dayjs().day(medic[i].dayOfWeek)) || (medic.range === 'month' && dayjs().date() === dayjs().date(medic[i].dayOfMonth)))) {
                 setMedicForToday.push(medic[i])
                 setFormState.amount(medic[i].amount - 1);
