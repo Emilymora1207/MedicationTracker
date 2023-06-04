@@ -190,7 +190,7 @@ function AllMeds() {
                                         nested
                                         >
                                         { close => (
-                                        <div >
+                                        <div style={styles.buttons} >
                                             <h3>Do you want to delete this medication?</h3>
                                             <button style={styles.button}>Delete</button>
                                             <button onClick={() => close()} style={styles.buttonGrey}

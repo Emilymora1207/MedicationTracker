@@ -1,6 +1,4 @@
-// import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-// import { colors } from '../assets/colors';
 import Auth from '../utils/auth';
 import { Link, useLocation } from 'react-router-dom';
 

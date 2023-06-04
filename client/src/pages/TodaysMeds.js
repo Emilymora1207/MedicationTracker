@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
@@ -63,12 +63,24 @@ const styles = {
 }
 
 function TodaysMeds() {
+    window.location.reload(false)
+    const [then, setThen] = useState();
+    const [now, setNow] = useState();
+
     const [err, setErr] = useState(false)
     const [medicForToday, setMedicForToday] = useState([])
     const [formState, setFormState] = useState({
         amount: '',
         everyOtherTime: ''
     })
+    const checkLastReload = () => {
+        setNow(dayjs().format(MM/DD/YYYY))
+        if (now !== then || then === null) {
+            setThen(dayjs().format(MM/DD/YYYY))
+            window.location.reload(true)
+        }
+    }
+
     
     const { medicId } = useParams();
 
@@ -82,7 +94,7 @@ function TodaysMeds() {
     if (loading) {
         return <div>Loading...</div>;
     }
-
+    const [updateMed, { error, response }] = useMutation(UPDATE_MED)
 
     for (let i = 0; i < medic.length; i++) {
 
@@ -91,26 +103,22 @@ function TodaysMeds() {
         }
             if (medic[i].everyOtherTime !== false && (medic.range === 'day' || (medic.range === 'week' && dayjs().day() === dayjs().day(medic[i].dayOfWeek)) || (medic.range === 'month' && dayjs().date() === dayjs().date(medic[i].dayOfMonth)))) {
                 setMedicForToday.push(medic[i])
-        //         setFormState.amount(medic[i].amount - 1);
+                setFormState.amount(medic[i].amount - 1);
     
+            const updateAmountAndEOT = async () => {
 
-        //         const [updateMed, { error, data }] = useMutation(UPDATE_MED)
+            try {
+                const { response } = await updateMed({
+                    variables: { ...formState },
+                });
 
-        //     const updateAmountAndEOT = async () => {
-
-        //     try {
-        //         const { data } = await updateMed({
-        //             variables: { ...formState },
-        //         });
-    
-        //         Auth.login(data.addUser.token);
-        //         setErr(false);
-        //     } catch (e) {
-        //         console.error(e);
-        //         setErr(true)
-        //     }
-        // }
-        // updateAmountAndEOT()
+                setErr(false);
+            } catch (e) {
+                console.error(e);
+                setErr(true)
+            }
+        }
+        updateAmountAndEOT()
         }
     }
     return (
