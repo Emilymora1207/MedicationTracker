@@ -33,6 +33,7 @@ With the `Medication Tracker`, you can easily record and monitor your medication
 - JWT
 - apollo-server-express
 - Bootsrap
+- Google Map
 
 ## Usage
 

@@ -163,19 +163,22 @@ h1,h3,p {
 	background-color: #f2f2f2;
 	padding: 20px;
 	margin-right: 20px;
+	border: rgb(41, 41, 203) solid 2px;
 }
 .card-container {
 	margin-top: 10px;
 	overflow-y: auto;
 	height: 50vh;
+	border: rgb(41, 41, 203) solid 2px;
 }
 .side-container__form-element {
-	margin-bottom: 4px;
+	margin-bottom: 10px;
 }
 
 .map-container {
-	height: 90vh;
+	height: 85vh;
 	flex: 5;
+	border: rgb(41, 41, 203) solid 2px;
 }
 
 .marker-card {
