@@ -62,7 +62,18 @@ This project is contributed by the folowwing individuals. Taking parts in `Front
 
 No test for this application has been given.
 
+
 ## Screenshots
+<img width="1280" alt="Screen Shot 2023-06-05 at 11 33 45 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/2065f94b-b38a-495d-b886-d8a3e7a58cd3">
+<img width="1269" alt="Screen Shot 2023-06-05 at 11 34 36 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/72bb054e-a073-4690-aa7a-68de1841ed0e">
+<img width="1280" alt="Screen Shot 2023-06-05 at 11 35 18 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/9445374b-785a-4f9e-8a4a-357f30140c27">
+<img width="1268" alt="Screen Shot 2023-06-05 at 11 36 04 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/98404ba4-2367-4eec-9f2a-5e16ea6dfb46">
+<img width="1280" alt="Screen Shot 2023-06-05 at 11 36 44 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/85aabd21-22ac-4045-9ea3-43cb1a6b82c6">
+<img width="1280" alt="Screen Shot 2023-06-05 at 11 37 26 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/d1feba62-7a88-4be7-8255-09bc8adea21b">
+
+
+
+
 
 ## Heroku Link
 
