@@ -44,7 +44,7 @@ By selecting **Add Medication**, users will be prompted to complete a form about
 
 `Running the Application`
 
-In order to run this application the user must clone the repo, upon cloning the repo open `CLI` run `npm i` then `npm run seed`, `npm run build` and to start the server `npm run develop`, May need to create a file (.env) and write this code (REACT_APP_GOOGLE_API_KEY = "Your_API_KEY").
+In order to run this application the user must clone the repo, upon cloning the repo open `CLI` run `npm i` then `npm run seed`, `npm run build` and to start the server `npm run develop`, May need to create a file (.env) and write this code `(REACT_APP_GOOGLE_API_KEY = "Your_API_KEY")`.
 
 ## License
 
