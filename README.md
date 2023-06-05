@@ -70,7 +70,7 @@ No test for this application has been given.
 <img width="1280" alt="Screen Shot 2023-06-05 at 11 35 18 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/9445374b-785a-4f9e-8a4a-357f30140c27">
 <img width="1268" alt="Screen Shot 2023-06-05 at 11 36 04 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/98404ba4-2367-4eec-9f2a-5e16ea6dfb46">
 <img width="1280" alt="Screen Shot 2023-06-05 at 11 36 44 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/111917255/85aabd21-22ac-4045-9ea3-43cb1a6b82c6">
-![Screen Shot 2023-06-05 at 2 12 04 PM (2)](https://github.com/Emilymora1207/MedicationTracker/assets/119641606/c2678a3b-ad92-4a5c-82c3-fa79a45b1622)
+<img width="1280" alt="Screen Shot 2023-06-05 at 11 36 44 AM" src="https://github.com/Emilymora1207/MedicationTracker/assets/119641606/c2678a3b-ad92-4a5c-82c3-fa79a45b1622">
 
 
 
