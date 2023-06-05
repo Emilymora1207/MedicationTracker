@@ -1,6 +1,4 @@
-// import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-// import { colors } from '../assets/colors';
 import Auth from '../utils/auth';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -47,13 +45,12 @@ const styles = {
 
 
 function Header() {
-    const [loggedIn, setLoggedIn] = useState(true);
     const location = useLocation();
     console.log(location);
     const logout = (event) => {
         event.preventDefault();
         Auth.logout();
-      };
+    };
     return (
         <div>
             <header style={styles.header}>
@@ -62,21 +59,24 @@ function Header() {
                     <img style={styles.logo} alt="logo" src={logo} />
                     <h1>Medication Tracker</ h1>
                 </Link>
-
-                {/* *********************need to add the auth login stuff once the back end is set up */}
-                {/* {Auth.loggedIn() ? (
-            <> */}
+                {/* checks if the upser is logged in and displays the correct links in the header */}
                 {Auth.loggedIn() ? (
                     <ul style={styles.links}>
-                        <Link to='/addNew' style={styles.eachLink}
+                        <Link
+                            to='/addNew'
+                            style={location.pathname === 'addNew' ? styles.activeLink : styles.eachLink}
                             className='link add-link'>
                             <li>Add Medication</li>
                         </Link>
-                        <Link to='/allMeds' style={styles.activeLink}
+                        <Link to='/allMeds' style={location.pathname === 'allMeds' ? styles.activeLink : styles.eachLink}
                             className='link view-all-link'>
                             <li>View all Medication</li>
                         </Link>
-                        <Link to='/findPharmacy' style={styles.eachLink}><li>Find A Pharmacy</li></Link>
+                        <Link
+                            to='/findPharmacy'
+                            style={styles.eachLink}>
+                            <li>Find A Pharmacy</li>
+                        </Link>
                         <Link to='/login' style={styles.eachLink}
                             className='link account-link' onClick={logout}>
                             <li>Logout</li>
@@ -84,17 +84,20 @@ function Header() {
                     </ul>
                 ) : (
                     <ul style={styles.links}>
-                        <li style={styles.activeLink}>
-                            <Link onClick={() => setLoggedIn(true)}
+                        <Link style={location.pathname === 'login' ? styles.activeLink : styles.eachLink}
+                            //  onClick={() => setLoggedIn(true)}
                             to='/login' className="btn btn-lg btn-primary m-2">
+                            <li>
                                 Login
-                            </Link>
-                        </li>
-                        <li style={styles.eachLink}>
-                            <Link to='/signup' className="btn btn-lg btn-light m-2" >
-                                Signup
-                            </Link>
-                        </li>
+                            </li>
+                        </Link>
+                        <Link
+                        style={location.pathname === 'signup' ? styles.activeLink : styles.eachLink}
+                        to='/signup' 
+                        className="btn btn-lg btn-light m-2" >
+                            <li>Signup</li>
+                        </Link>
+
                     </ul>
                 )}
                 {/* </>

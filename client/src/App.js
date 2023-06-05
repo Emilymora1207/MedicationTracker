@@ -7,8 +7,9 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// import './styles/App.css';
+import './styles/App.css';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import AddMed from './pages/AddMed';
 import Login from './pages/Login'
 import SignUp from './pages/SignUp';
@@ -22,6 +23,7 @@ import  ErrorBoundary  from './components/common/ErrorBoundary';
 import PlaceCard from './pages/PlaceCard';
 // **********************will need to delete once conttected to back end******
 import medic from './assets/medicSeedPractice';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -98,6 +100,7 @@ function App() {
               />
               
           </Routes>
+          {/* <Footer/> */}
         </div>
       </Router>
     </ApolloProvider>

@@ -20,8 +20,14 @@ const resolvers = {
       const userMedics = await User.find({ _id: context.user._id }).populate({path:'medics', select:'-__v'});
       // updates queue array of each medics
       // const updatedMedics = await updateQueue(userMedics);
-      console.log(userMedics[0].medics);
+      console.log(userMedics[0].medic);
       return userMedics[0];
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id });
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
   },
   Mutation: {
@@ -79,39 +85,39 @@ const resolvers = {
       return updatedMedic;
     },
     // toggles isActive of specific medicine
-    toggleIsActive: async (parent, { medicId }, context) => {
-      if (!context.user)
-        throw new AuthenticationError("You need to be logged in!");
+    // toggleIsActive: async (parent, { medicId }, context) => {
+    //   if (!context.user)
+    //     throw new AuthenticationError("You need to be logged in!");
 
-      // toggles isActive of specific medicine matching medicId and userId from context and amount > 0
-      const toggledIsActive = await Medic.findOneAndUpdate(
-        { _id: medicId, userId: context.user._id, amount: { $gt: 0 } },
-        [{ $set: { isActive: { $not: "$isActive" } } }],
-        { new: true }
-      );
+    //   // toggles isActive of specific medicine matching medicId and userId from context and amount > 0
+    //   const toggledIsActive = await Medic.findOneAndUpdate(
+    //     { _id: medicId, userId: context.user._id, amount: { $gt: 0 } },
+    //     [{ $set: { isActive: { $not: "$isActive" } } }],
+    //     { new: true }
+    //   );
 
-      return toggledIsActive;
-    },
-    // updates check value on queue obj to true and decreases amount on medicine by dosage
-    checkQueue: async (parent, { medicId, queueId }, context) => {
-      if (!context.user)
-        throw new AuthenticationError("You should be logged in!");
+    //   return toggledIsActive;
+    // },
+    // // updates check value on queue obj to true and decreases amount on medicine by dosage
+    // checkQueue: async (parent, { medicId, queueId }, context) => {
+    //   if (!context.user)
+    //     throw new AuthenticationError("You should be logged in!");
 
-      const medic = await Medic.findOne({
-        _id: medicId,
-        "queue._id": queueId,
-      });
-      // finds index of queue obj matching queueId
-      const index = medic.queue.findIndex((el) => el._id == queueId);
+    //   const medic = await Medic.findOne({
+    //     _id: medicId,
+    //     "queue._id": queueId,
+    //   });
+    //   // finds index of queue obj matching queueId
+    //   const index = medic.queue.findIndex((el) => el._id == queueId);
 
-      if (index > -1) {
-        medic.queue[index].checked = true;
-        medic.amount -= medic.dosage;
-      }
-      // saves updated medic to db and returns it
-      const toggledQueueChecked = await medic.save();
-      return toggledQueueChecked;
-    },
+    //   if (index > -1) {
+    //     medic.queue[index].checked = true;
+    //     medic.amount -= medic.dosage;
+    //   }
+    //   // saves updated medic to db and returns it
+    //   const toggledQueueChecked = await medic.save();
+    //   return toggledQueueChecked;
+    // },
   },
 };
 

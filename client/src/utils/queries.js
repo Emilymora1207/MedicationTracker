@@ -34,9 +34,9 @@ export const QUERY_MEDICS = gql`
         dosage
         amount
         range
-        subRange
-        times
-        isActive
+        everyOtherTime
+        dayOfWeek
+        dayOfMonth
       }
     }
   }
@@ -47,7 +47,6 @@ export const QUERY_ME = gql`
     me {
       _id
       username
-      medic
     }
   }
 `;

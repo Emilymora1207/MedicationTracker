@@ -1,4 +1,7 @@
-
+import { ADD_MED } from '../utils/mutations';
+import { QUERY_ME } from '../utils/queries';
+import { useState } from 'react';
+import { useMutation, useQuery } from '@apollo/client';
 
 import logo from '../assets/Asset1.svg';
 
@@ -72,8 +75,71 @@ const styles = {
 }
 
 function AddMed() {
+    const [err, setErr] = useState(false);
 
+    const [weekQuestion, setWeekQuestion] = useState(false)
+    const [MonthQuestion, setMonthQuestion] = useState(false)
 
+    const [formState, setFormState] = useState({
+        name: '',
+        dosage: '',
+        amount: '',
+        range: '',
+        everyOtherTime: '',
+        dayOfWeek: '',
+        dayOfMonth: '',
+        userId: ''
+
+    });
+
+    // const [checkPw, setCheckPw] = useState({
+    //     password: '',
+    //     confirmPw: '',
+    // })
+
+    const [addMedic, { error, response }] = useMutation(ADD_MED);
+
+    const { loading, data } = useQuery(QUERY_ME);
+    const userData = data?.me || {}
+    if (loading) {
+        return <div></div>
+    }
+    console.log(userData)
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        if (event.target.value === 'week') {
+            setWeekQuestion(true)
+            setMonthQuestion(false)
+        } else if (event.target.value === 'month') {
+            setMonthQuestion(true)
+            setWeekQuestion(false)
+        } else if (event.target.value === 'day') {
+            setWeekQuestion(false);
+            setMonthQuestion(false);
+        }
+
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+
+        try {
+            const { response } = await addMedic({
+                variables: { medic:formState },
+            });
+
+            setErr(false);
+        } catch (e) {
+            console.error(e);
+            setErr(true)
+        }
+    };
 
     return (
         <div style={styles.container}>
@@ -82,25 +148,69 @@ function AddMed() {
             {/* adds the gradient border */}
             <div style={styles.addMed}>
                 <div style={styles.borderSides}></div>
-                <form style={styles.form}>
+                <form onSubmit={handleFormSubmit} style={styles.form}>
                     <label style={styles.labels} for='medName'>Medication Name: </label>
-                    <input style={styles.inputs} type='text' name='medName' />
+                    <input onChange={handleChange} style={styles.inputs} type='text' name='name' />
                     <label style={styles.labels} for='range'>How often do you take your Medication? </label>
                     <div style={styles.selects}>
-                        <select style={styles.inputs} name='subRange'>
-                            <option value='every'>Every</option>
-                            <option value='everyOther'>Every other</option>
+                        <select onChange={handleChange} style={styles.inputs} name='everyOtherTime'>
+                            <option className='every'>Every</option>
+                            <option
+                                className='everyOther'
+                                value='true'>Every other</option>
                         </select>
-                        <select style={styles.inputs} name='range'>
-                            <option value='daily'>Day</option>
-                            <option value='weekly'>Week</option>
-                            <option value='monthly'>Month</option>
+                        <select onChange={handleChange} style={styles.inputs} name='range'>
+                            <option value='day'>Day</option>
+                            <option value='week'>Week</option>
+                            <option value='month'>Month</option>
                         </select>
                     </div>
+                    {weekQuestion ? (<div><h3>What day of the week do you take your Medication? </h3><select onChange={handleChange} name='dayOfWeek'>
+                        <option value='0'>Sunday</option>
+                        <option value='1'>Monday</option>
+                        <option value='2'>Tuesday</option>
+                        <option value='3'>Wednesday</option>
+                        <option value='4'>Thursday</option>
+                        <option value='5'>Friday</option>
+                        <option value='6'>Saturday</option>
+                    </select></div>) : ('')}
+                    {MonthQuestion ? (<div><h3>What day of the Month do you take your Medication? </h3><select onChange={handleChange} name='dayOfMonth'>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                        <option value='7'>7</option>
+                        <option value='8'>8</option>
+                        <option value='9'>9</option>
+                        <option value='10'>10</option>
+                        <option value='11'>11</option>
+                        <option value='12'>12</option>
+                        <option value='13'>13</option>
+                        <option value='14'>14</option>
+                        <option value='15'>15</option>
+                        <option value='16'>16</option>
+                        <option value='17'>17</option>
+                        <option value='18'>18</option>
+                        <option value='19'>19</option>
+                        <option value='20'>20</option>
+                        <option value='21'>21</option>
+                        <option value='22'>22</option>
+                        <option value='23'>23</option>
+                        <option value='24'>24</option>
+                        <option value='25'>25</option>
+                        <option value='26'>26</option>
+                        <option value='27'>27</option>
+                        <option value='28'>28</option>
+                        <option value='29'>29</option>
+                        <option value='30'>30</option>
+                        <option value='31'>31</option>
+                    </select></div>) : ('')}
                     <label style={styles.labels} for='amount'>How many times do you need to take this Medication? <br /><sub>if no set amount write 'N/A'</sub></label>
-                    <input style={styles.inputs} type='text' placeholder='i.e. "30"' name='amount' />
+                    <input onChange={handleChange} style={styles.inputs} type='text' placeholder='i.e. "30"' name='amount' />
                     <label style={styles.labels} for='dosage'>What dosage do you take?</label>
-                    <input style={styles.inputs} type='text' placeholder='i.e. "450mg"' name='dosage' />
+                    <input onChange={handleChange} style={styles.inputs} type='text' placeholder='i.e. "450mg"' name='dosage' />
                     <button style={styles.button} className='addMed'>Add Medication</button>
                 </form>
                 {/* adds the gradient border */}

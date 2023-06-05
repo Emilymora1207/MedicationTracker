@@ -13,13 +13,12 @@ const typeDefs = gql`
   type Medic {
     _id: ID!
     name: String
-    dosage: Int
+    dosage: String
     amount: Int
     range: String
-    subRange: String
-    times: [String]
-    queue: [Queue]
-    isActive: Boolean
+    everyOtherTime: Boolean
+    dayOfWeek: Int
+    dayOfMonth: Int
     userId: ID!
   }
 
@@ -50,6 +49,7 @@ const typeDefs = gql`
   type Query {
     getMedic(medicId: ID!): Medic
     medics: User
+    me: User
   }
 
   type Mutation {
