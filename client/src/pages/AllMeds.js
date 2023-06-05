@@ -19,6 +19,7 @@ const styles = {
   allMeds: {
     width: '60%',
     display: 'flex',
+    justifyContent: 'center',
   },
   outsideForm: {
 
@@ -117,7 +118,7 @@ function AllMeds() {
     variables: { medicId: medicId },
   });
   console.log(data);
-  const medic = data?.medics.medics || [];
+  const medic = data?.medics?.medics || [];
 
   if (loading) {
     return <div>Loading...</div>;

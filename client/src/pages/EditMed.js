@@ -1,7 +1,7 @@
 import logo from '../assets/Asset1.svg';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { UPDATE_MED } from '../utils/mutations';
 import { QUERY_SINGLE_MEDIC } from '../utils/queries';
@@ -108,13 +108,14 @@ function EditMed() {
     console.log(data);
     const medic = data?.getMedic || {};
     console.log(medic)
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+
+
+
+   
     //updating the medication 
 
-    const [weekQuestion, setWeekQuestion] = useState(false)
-    const [MonthQuestion, setMonthQuestion] = useState(false)
+    const [weekQuestion, setWeekQuestion] = useState(false);
+    const [MonthQuestion, setMonthQuestion] = useState(false);
 
     const [formState, setFormState] = useState({
         name: medic.name,
@@ -127,7 +128,9 @@ function EditMed() {
     });
 
     const [updateMed, { error, response }] = useMutation(UPDATE_MED);
-
+ if (loading) {
+        return <div>Loading...</div>;
+    }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -166,7 +169,6 @@ function EditMed() {
             setErr(true)
         }
     };
-
 
     return (
         <div style={styles.centered}>

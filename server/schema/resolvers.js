@@ -20,7 +20,7 @@ const resolvers = {
       const userMedics = await User.find({ _id: context.user._id }).populate({path:'medics', select:'-__v'});
       // updates queue array of each medics
       // const updatedMedics = await updateQueue(userMedics);
-      console.log(userMedics[0].medics);
+      console.log(userMedics[0].medic);
       return userMedics[0];
     },
     me: async (parent, args, context) => {
