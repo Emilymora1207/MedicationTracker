@@ -97,7 +97,7 @@ function AddMed() {
     //     confirmPw: '',
     // })
 
-    const [addMed, { error, response }] = useMutation(ADD_MED);
+    const [addMedic, { error, response }] = useMutation(ADD_MED);
 
     const { loading, data } = useQuery(QUERY_ME);
     const userData = data?.me || {}
@@ -130,8 +130,8 @@ function AddMed() {
         console.log(formState);
 
         try {
-            const { response } = await addMed({
-                variables: { ...formState },
+            const { response } = await addMedic({
+                variables: { medic:formState },
             });
 
             setErr(false);

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { setAutomaticRefresh } from 'react-admin';
-import { useDispatch } from 'react-redux';
-
-
+// import { setAutomaticRefresh } from 'react-admin';
+// import { useDispatch } from 'react-redux';
 
 import dayjs from 'dayjs';
 // import medic from '../assets/medicSeedPractice'
@@ -65,7 +63,9 @@ const styles = {
         }
     },
 }
-
+function currentDay() {
+    ('#currentDay').text(dayjs().format(' MM/DD/YYYY'))
+  } ;
 function TodaysMeds() {
 //     const dispatch = useDispatch();
 // dispatch(setAutomaticRefresh(false))
@@ -77,7 +77,7 @@ function TodaysMeds() {
     const [checkThen, setCheckThen] = useState();
 
     const checkLastReload = () => {
-        setNow(dayjs().format(MM/DD/YYYY))
+        setNow(dayjs().format('MM/DD/YYYY'))
         setCheckThen(localStorage.getItem('then'))
     }
     // useEffect to check if a page has been loaded today and only load a new page if its a new day
@@ -85,7 +85,7 @@ function TodaysMeds() {
         () => {
             checkLastReload();
             if (now !== checkThen || checkThen === null) {
-                setThen(dayjs().format(MM/DD/YYYY))
+                setThen(dayjs().format('MM/DD/YYYY'))
                localStorage.setItem('then', then);
                window.location.reload();
             }
@@ -112,19 +112,20 @@ const handleCheckedMeds = (name) => {
     });
 
     const medic = data?.medic || [];
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    const [err, setErr] = useState(false)
+const [err, setErr] = useState(false)
     const [medicForToday, setMedicForToday] = useState([])
     const [formState, setFormState] = useState({
         amount: '',
         everyOtherTime: ''
-    })
-
+    });
     const [updateMed, { error, response }] = useMutation(UPDATE_MED)
+    if (loading) {
+        return <div>Loading...</div>;
+    };
+
+    
+
+    
 
 //goes through all the medication for that user and pulls only the ones needed for today 
     for (let i = 0; i < medic.length; i++) {
@@ -160,7 +161,7 @@ const handleCheckedMeds = (name) => {
             <div style={styles.todaysMeds}>
                 <div style={styles.borderSides}></div>
                 <form style={styles.form}>
-                    {medicForToday.map((medic) => (
+                    {medic.map((medic) => (
                         <div style={styles.eachMed}>
                             <label id={medic.name} style={styles.label}>
                                 <h3>{medic.name}</h3>
@@ -175,5 +176,6 @@ const handleCheckedMeds = (name) => {
         </div>
     )
 }
+
 
 export default TodaysMeds;

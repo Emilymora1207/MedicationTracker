@@ -72,11 +72,11 @@ function Header() {
                             className='link view-all-link'>
                             <li>View all Medication</li>
                         </Link>
-                        {/* <Link
+                        <Link
                             to='/findPharmacy'
                             style={styles.eachLink}>
                             <li>Find A Pharmacy</li>
-                        </Link> */}
+                        </Link>
                         <Link to='/login' style={styles.eachLink}
                             className='link account-link' onClick={logout}>
                             <li>Logout</li>

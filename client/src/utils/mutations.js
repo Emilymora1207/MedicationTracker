@@ -28,11 +28,10 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_MED = gql`
-  mutation addMed($userId: ID!, $Medic: String!) {
-    addMed(userId: $userId, medic: $medic) {
+  mutation addMedic($medic: MedicInput!) {
+    addMedic(medic: $medic) {
       _id
       name
-      medics
     }
   }
 `;
@@ -42,7 +41,6 @@ export const REMOVE_MED = gql`
     removeMed(medic: $medic) {
       _id
       name
-      medics
     }
   }
 `;
@@ -52,7 +50,6 @@ export const UPDATE_MED = gql`
     updateMed(medic: $medic) {
       _id
       name
-      medics
     }
   }
 `;
