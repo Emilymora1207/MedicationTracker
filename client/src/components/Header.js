@@ -16,7 +16,8 @@ const styles = {
     homeLink: {
         display: 'flex',
         textDecoration: 'none',
-        color: 'black'
+        color: 'black',
+        alignItems: 'center'
     },
     logo: {
         height: '80px',
