@@ -1,0 +1,81 @@
+    .centered {
+      display: flex;
+      justify-content:center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .outsideForm {
+      width: 30%;
+      display: flex,
+    }
+
+    .form {
+      background: none;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      justify-content: space-around;
+      border-radius: 0%;
+      align-items: center;
+      width: 100%;
+    }
+    .borderSides {
+      width: 1.2%;
+      background-image: linear-gradient(rgba(36, 135, 255, 0) 2%, rgb(36, 135, 255) 20%, rgb(41, 227, 0) 80%, rgba(41, 227, 0, 0) 98%);
+    }
+    .eachMed {
+      display: flex;
+      /* // justifyContent: 'space-around', */
+      width: 80%;
+      border-bottom: 1px black solid;
+      /* // margin: '10px', */
+      flex-direction: column;
+    }
+    button {
+      margin: 5px;
+      cursor: pointer;
+      font-weight: 600;    
+      color: #fff;
+      font-size: 14px;
+      height: 38px;
+      padding: 8px 24px;
+      border-radius: 50px;
+      border: none;
+      box-shadow: 0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%);
+      transition: all .2s ease-out;
+    }
+
+    button:hover {
+        box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+      }
+    .buttonColor {
+        background-image: linear-gradient(45deg, rgb(36, 135, 255),rgb(77, 204, 255));
+    }
+    .buttonGrey {
+      background-image: linear-gradient(45deg, rgb(115, 115, 115) ,rgb(160, 160, 160))
+      }
+
+    .buttons {
+      display: flex;
+      width: 100%;
+      justify-content: right;
+    }
+    .popUp {
+      background-color: white;
+      border-radius: 5px;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+    }
+
+    /* .margins {
+      margin: 0;
+    } */
+
+    @media only screen and (max-width: 768px) {
+      /* For mobile phones: */
+      [class*="col-"] {
+        width: 100%;
+      }
+    }

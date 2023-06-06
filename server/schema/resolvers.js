@@ -2,7 +2,6 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Medic } = require("../models");
 const { signToken } = require("../utils/auth");
 const { updateQueue } = require("../utils/updateQueue");
-const { default: medic } = require("../../client/src/assets/medicSeedPractice");
 
 const resolvers = {
   Query: {
@@ -68,8 +67,11 @@ const resolvers = {
         userId: context.user._id,
       });
 
+      const user = await User.findByIdAndUpdate({_id: context.user._id}, { $push: {medics: newMedic._id}})
+
       return newMedic;
     },
+    
     // updates specific medic matching medicId and userId using context.
     updateMedic: async (parent, { medicId, medic }, context) => {
       if (!context.user)
@@ -78,7 +80,7 @@ const resolvers = {
       // updates medic matching medicId and userId from context
       const updatedMedic = await Medic.findOneAndUpdate(
         { _id: medicId, userId: context.user._id },
-        { ...medic },
+        { ...medic, userId: context.user._id },
         { new: true }
       );
 

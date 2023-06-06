@@ -46,8 +46,8 @@ export const REMOVE_MED = gql`
 `;
 
 export const UPDATE_MED = gql`
-  mutation updateMED($medic: String!) {
-    updateMed(medic: $medic) {
+  mutation updateMED($medicId: ID!, $medic: MedicInput!) {
+    updateMedic(medicId: $medicId, medic: $medic) {
       _id
       name
     }

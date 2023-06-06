@@ -122,9 +122,10 @@ function EditMed() {
         dosage: medic.dosage,
         amount: medic.amount,
         range: medic.range,
-        everyOtherTime: medic.everyOtherTime || null,
-        dayOfWeek: medic.dayOfWeek || null,
-        dayOfMonth: medic.dayOfMonth || null,
+        everyOtherTime: medic.everyOtherTime || undefined,
+        dayOfWeek: medic.dayOfWeek || undefined,
+        dayOfMonth: medic.dayOfMonth || undefined,
+        userId: ''
     });
 
     const [updateMed, { error, response }] = useMutation(UPDATE_MED);
@@ -160,7 +161,13 @@ function EditMed() {
 
         try {
             const { response } = await updateMed({
-                variables: { ...formState },
+                variables: {medicId: id, medic: {
+                    ...formState, 
+                    amount: parseInt(formState.amount),
+                    dayOfWeek: parseInt(formState.dayOfWeek),
+                    dayOfMonth: parseInt(formState.dayOfMonth),
+                    everyOtherTime: formState.everyOtherTime === "true" ? true : null
+                } },
             });
 
             setErr(false);
@@ -195,7 +202,7 @@ function EditMed() {
                             onChange={handleChange}
                             style={styles.inputs}
                             name='everyOtherTime'>
-                            <option selected={medic.everyOtherTime === null}>Every</option>
+                            <option selected={medic.everyOtherTime === undefined}>Every</option>
                             <option selected={medic.everyOtherTime === (true || false)}
                                 value='true'>Every other</option>
                         </select>

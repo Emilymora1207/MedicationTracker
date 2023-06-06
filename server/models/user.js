@@ -26,6 +26,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    // lastReload: {
+    //   type: String
+    // },
     medics: [{
       type: Schema.Types.ObjectId,
       ref: 'Medic',

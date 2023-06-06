@@ -35,11 +35,13 @@ const typeDefs = gql`
 
   input MedicInput {
     name: String
-    dosage: Int
+    dosage: String
     amount: Int
     range: String
-    subRange: String
-    times: [String]
+    everyOtherTime: Boolean
+    dayOfWeek: Int
+    dayOfMonth: Int
+    userId: ID!
   }
 
   input QueueInput {

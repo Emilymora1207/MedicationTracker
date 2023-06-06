@@ -51,7 +51,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
+        <div style={{height: '100%'}}>
           <Header />
           <Routes>
             <Route
@@ -83,7 +83,7 @@ function App() {
               element={<FindPharm/>}
               />
           </Routes>
-          {/* <Footer/> */}
+          <Footer/>
         </div>
       </Router>
     </ApolloProvider>
