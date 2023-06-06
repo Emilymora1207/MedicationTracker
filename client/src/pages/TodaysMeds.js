@@ -48,6 +48,9 @@ const styles = {
         margin: '10px',
         color: 'white'
     },
+    margin: {
+        margin: '15px'
+    },
     checkbox: {
         // 'appearance': 'none',
         accentColor: 'rgb(14, 56, 107)',
@@ -184,9 +187,9 @@ const updateAmountAndEOT = async () => {
                 {!medic ? (<div style={styles.form}><h2>You have no medications to take today!</h2><p>Click <Link to='/addNew'>here</Link> to add a new medication</p></div>) : ('')}
                     {medic.filter(isTodayMed).map((medic) => (
                         <div style={styles.eachMed}>
-                            <label id={medic.name} style={styles.label}>
-                                <h3>{medic.name}</h3>
-                                <p>{medic.dosage}</p>
+                            <label id={medic.name}>
+                                <h3 style={styles.margin}>{medic.name}</h3>
+                                <p style={styles.margin}>{medic.dosage}</p>
                             </label>
                             <input 
                             onChange={handleCheckedMeds(medic.name)} 
