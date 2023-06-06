@@ -84,18 +84,13 @@ function AddMed() {
         name: '',
         dosage: '',
         amount: '',
-        range: '',
-        everyOtherTime: '',
-        dayOfWeek: '',
-        dayOfMonth: '',
+        range: 'day',
+        everyOtherTime: null,
+        dayOfWeek: null,
+        dayOfMonth: null,
         userId: ''
 
     });
-
-    // const [checkPw, setCheckPw] = useState({
-    //     password: '',
-    //     confirmPw: '',
-    // })
 
     const [addMedic, { error, response }] = useMutation(ADD_MED);
 
@@ -109,14 +104,18 @@ function AddMed() {
     const handleChange = (event) => {
         const { name, value } = event.target;
         if (event.target.value === 'week') {
-            setWeekQuestion(true)
-            setMonthQuestion(false)
+            setWeekQuestion(true);
+            setMonthQuestion(false);
+            setFormState({dayOfMonth: null});
         } else if (event.target.value === 'month') {
-            setMonthQuestion(true)
-            setWeekQuestion(false)
+            setMonthQuestion(true);
+            setWeekQuestion(false);
+            setFormState({dayOfWeek: null});
         } else if (event.target.value === 'day') {
             setWeekQuestion(false);
             setMonthQuestion(false);
+            setFormState({dayOfWeek: null});
+            setFormState({dayOfMonth: null});
         }
 
         setFormState({
@@ -126,14 +125,21 @@ function AddMed() {
     };
 
     const handleFormSubmit = async (event) => {
+        setFormState({userId: userData._id});
         event.preventDefault();
         console.log(formState);
 
         try {
             const { response } = await addMedic({
-                variables: { medic:formState },
+                variables: { medic: {
+                    ...formState, 
+                    amount: parseInt(formState.amount),
+                    dayOfWeek: parseInt(formState.dayOfWeek),
+                    dayOfMonth: parseInt(formState.dayOfMonth),
+                    everyOtherTime: formState.everyOtherTime === "true" ? true : null
+                } },  
             });
-
+            return response
             setErr(false);
         } catch (e) {
             console.error(e);
@@ -154,10 +160,8 @@ function AddMed() {
                     <label style={styles.labels} for='range'>How often do you take your Medication? </label>
                     <div style={styles.selects}>
                         <select onChange={handleChange} style={styles.inputs} name='everyOtherTime'>
-                            <option className='every'>Every</option>
-                            <option
-                                className='everyOther'
-                                value='true'>Every other</option>
+                            <option>Every</option>
+                            <option value='true'>Every other</option>
                         </select>
                         <select onChange={handleChange} style={styles.inputs} name='range'>
                             <option value='day'>Day</option>
@@ -165,7 +169,7 @@ function AddMed() {
                             <option value='month'>Month</option>
                         </select>
                     </div>
-                    {weekQuestion ? (<div><h3>What day of the week do you take your Medication? </h3><select onChange={handleChange} name='dayOfWeek'>
+                    {weekQuestion ? (<div><label style={styles.labels} for='dayOfWeek' >What day of the week do you take your Medication? </label><select style={styles.inputs} onChange={handleChange} name='dayOfWeek'>
                         <option value='0'>Sunday</option>
                         <option value='1'>Monday</option>
                         <option value='2'>Tuesday</option>
@@ -174,7 +178,7 @@ function AddMed() {
                         <option value='5'>Friday</option>
                         <option value='6'>Saturday</option>
                     </select></div>) : ('')}
-                    {MonthQuestion ? (<div><h3>What day of the Month do you take your Medication? </h3><select onChange={handleChange} name='dayOfMonth'>
+                    {MonthQuestion ? (<div><label style={styles.labels} for='dayOfMonth'>What day of the Month do you take your Medication? </label><select style={styles.inputs} onChange={handleChange} name='dayOfMonth'>
                         <option value='1'>1</option>
                         <option value='2'>2</option>
                         <option value='3'>3</option>

@@ -1,12 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
-import { QUERY_MEDICS } from '../utils/queries';
+import { QUERY_MEDICS, QUERY_ME } from '../utils/queries';
+import { REMOVE_MED } from '../utils/mutations';
 
 import logo from '../assets/Asset1.svg';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css'
 import { useState } from 'react';
+// import '../styles/pages.css'
 
 
 const styles = {
@@ -17,9 +19,10 @@ const styles = {
     alignItems: 'center'
   },
   allMeds: {
-    width: '60%',
+    width: '30%',
     display: 'flex',
-    justifyContent: 'center',
+
+    // justifyContent: 'center',
   },
   outsideForm: {
 
@@ -40,6 +43,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     padding: '20px',
+    justifyContent: 'space-around',
     borderRadius: '0%',
     alignItems: 'center',
     width: '100%'
@@ -110,6 +114,29 @@ const styles = {
 
 function AllMeds() {
 
+  // const [removeMed, { error }] = useMutation(REMOVE_MED, {
+  //   update(cache, { data: { removeMed } }) {
+  //     try {
+  //       cache.writeQuery({
+  //         query: QUERY_ME,
+  //         data: { me: removeMed },
+  //       });
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   },
+  // });
+
+  const handleDeleteMed= async (medic) => {
+    // try {
+    //   const { data } = await removeMed({
+    //     variables: { medic },
+    //   });
+    // } catch (err) {
+    //   console.error(err);
+    // }
+  };
+  
   // Use `useParams()` to retrieve value of the route parameter `:profileId`
   const { medicId } = useParams();
 
@@ -125,27 +152,22 @@ function AllMeds() {
   }
   return (
     <div style={styles.centered}>
-      <h1>{`Emily's Medications`}</h1>
+      <h1>{`All Medication`}</h1>
       <img style={{ height: '100px' }} alt="logo" src={logo} />
       <div style={styles.allMeds}>
         <div style={styles.borderSides}></div>
-        <div style={styles.outsideForm}>
-            <h2>All Medication</h2>
             <form style={styles.form} onSubmit={(e) => { e.preventDefault() }}>
+            {data?.medics?.medics.lenght === 0 ? (<div style={styles.centered}><h2>You have no medications added!</h2><p>Click <Link to='/addMed'>here</Link> to add a new medication</p></div>) : ('')}
               {medic.map((medic) => {
                 return (
-                  <div className={medic.name} style={styles.eachMed}>
-                    <h3 style={styles.margins}>{medic.name}</h3>
-                    <p style={styles.margins}>{medic.dosage}</p>
+                  <div className={`${medic.name}`} style={styles.eachMed}>
+                    <h3>{medic.name}</h3>
+                    <p>{medic.dosage}</p>
                     <div style={styles.buttons}>
-                      <Link to={`/update/${medic._id}`}> <button style={styles.button} className={`update-${medic.name}`}>Update</button></Link>
-                      {/* <button
-                                        onClick={() => setDeletePopup(true)}
-                                        style={styles.buttonGrey}
-                                        className={`delete=${medic.name}`}>Delete</button> */}
+                      <Link to={`/update/${medic._id}`}> <button style={styles.button}>Update</button></Link>
                       <Popup style={styles.popUp} trigger={<button
                         style={styles.buttonGrey}
-                        className={`delete=${medic.name}`}>Delete</button>}
+                         >Delete</button>}
                         closeOnDocumentClick
                         closeOnEscape
                         modal
@@ -154,8 +176,8 @@ function AllMeds() {
                         {close => (
                           <div >
                             <h3>Do you want to delete this medication?</h3>
-                            <button style={styles.button}>Delete</button>
-                            <button onClick={() => close()} style={styles.buttonGrey}
+                            <button onClick={handleDeleteMed(medic.id)} style={styles.button}>Delete</button>
+                            <button  onClick={() => close()} style={styles.buttonGrey}
                             >Cancel</button>
                           </div>
                         )}
@@ -166,9 +188,10 @@ function AllMeds() {
                 )
               })}
             </form>
+            <div style={styles.borderSides}></div>
         </div>
-        <div style={styles.borderSides}></div>
-      </div>
+
+      {/* </div> */}
     </div>
   )
 }

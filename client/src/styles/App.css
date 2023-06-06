@@ -10,6 +10,10 @@
 
 body {
   background-image: linear-gradient(45deg, rgb(152, 228, 255) 33%, rgb(214, 244, 255));
+  /* height: 100vh;
+  display: flex;
+  flex-direction: column; */
+  /* justify-content: space-between; */
   /* background-color: rgb(214, 244, 255) */
 }
 
