@@ -26,6 +26,7 @@
   "homepage": "https://github.com/Emilymora1207/MedicationTracker#readme",
   "dependencies": {
     "dayjs": "^1.11.8",
+    "dotenv": "^16.1.4",
     "http-proxy-middleware": "^2.0.6",
     "react-admin": "^4.11.1",
     "react-redux": "^8.0.7"
