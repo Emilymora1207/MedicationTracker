@@ -5,8 +5,8 @@ require("dotenv").config();
 
 // retrieves the values of environment variables JWT_SECRET and JWT_EXP using process.env in a Node.js application.
 
-const secret = process.env.JWT_SECRET;
-const expiration = process.env.JWT_EXP;
+const secret = `${process.env.JWT_SECRET}`;
+const expiration = `${process.env.JWT_EXP}`;
 
 //functions for authMiddleware for token verification and user assignment to req, and signToken for generating JWTs based on user data.
 module.exports = {
