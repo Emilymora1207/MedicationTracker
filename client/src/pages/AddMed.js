@@ -2,6 +2,7 @@ import { ADD_MED } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 import { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
+import { HashRouter as Router, useNavigate } from 'react-router-dom';
 
 import logo from '../assets/Asset1.svg';
 
@@ -75,8 +76,9 @@ const styles = {
 }
 
 function AddMed() {
+    const navigate= useNavigate();
     const [err, setErr] = useState(false);
-
+    
     const [weekQuestion, setWeekQuestion] = useState(false)
     const [MonthQuestion, setMonthQuestion] = useState(false)
 
@@ -139,6 +141,10 @@ function AddMed() {
                     everyOtherTime: formState.everyOtherTime === "true" ? true : null
                 } },  
             });
+
+            navigate('/allMeds')
+            window.location.reload(false)
+
             return response
             setErr(false);
         } catch (e) {

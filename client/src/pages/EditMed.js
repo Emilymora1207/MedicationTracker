@@ -2,7 +2,7 @@ import logo from '../assets/Asset1.svg';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import React, { useState } from 'react';
-
+import { HashRouter as Router, useNavigate } from 'react-router-dom';
 import { UPDATE_MED } from '../utils/mutations';
 import { QUERY_SINGLE_MEDIC } from '../utils/queries';
 
@@ -98,6 +98,7 @@ const styles = {
 }
 
 function EditMed() {
+    const navigate= useNavigate();
     const [err, setErr] = useState(false)
     const { id } = useParams()
     // grabbing the medication to update
@@ -169,7 +170,8 @@ function EditMed() {
                     everyOtherTime: formState.everyOtherTime === "true" ? true : null
                 } },
             });
-
+            navigate('/allMeds')
+            window.location.reload(false)
             setErr(false);
         } catch (e) {
             console.error(e);
