@@ -2,7 +2,7 @@ import { ADD_MED } from '../utils/mutations';
 import { QUERY_ME } from '../utils/queries';
 import { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { HashRouter as Router, useNavigate } from 'react-router-dom';
+import { HashRouter as Router, Link, useNavigate } from 'react-router-dom';
 
 import logo from '../assets/Asset1.svg';
 
